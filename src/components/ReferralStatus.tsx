@@ -49,7 +49,7 @@ export function ReferralStatus() {
   const handleCopy = async () => {
     if (!stats) return;
 
-    const referralUrl = `${window.location.origin}?ref=${stats.referral_code}`;
+    const referralUrl = `https://mantra.gonewx.com?ref=${stats.referral_code}`;
     await navigator.clipboard.writeText(referralUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -147,7 +147,7 @@ export function ReferralStatus() {
                 </button>
               </div>
               <div className="font-mono text-white bg-black/20 rounded-lg p-4 break-all">
-                {window.location.origin}?ref={stats.referral_code}
+                https://mantra.gonewx.com?ref={stats.referral_code}
               </div>
             </div>
           </div>
