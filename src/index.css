@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: hsl(217, 91%, 60%);
+  --secondary: hsl(142, 76%, 36%);
+  --diff-add: hsl(142, 76%, 36%, 0.2);
+  --diff-remove: hsl(0, 84%, 60%, 0.2);
+  --user-bubble: hsl(240, 4%, 16%);
+  --ai-bubble: transparent;
+  --timeline-track: hsl(217, 91%, 60%);
+  --timeline-knob: hsl(0, 0%, 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: hsl(240, 10%, 4%);
+  color: hsl(0, 0%, 95%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 70%);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 40px -10px hsl(217, 91%, 60%, 0.4);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 40px -10px hsl(142, 76%, 36%, 0.4);
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-dark-400/80 backdrop-blur-xl border border-white/5;
+  }
+}
+
+::selection {
+  background: hsl(217, 91%, 60%, 0.3);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(240, 10%, 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(240, 6%, 20%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(240, 6%, 30%);
+}
