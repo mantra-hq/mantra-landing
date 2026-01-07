@@ -31,16 +31,33 @@ export function ReferralStatus() {
         p_email: email.toLowerCase().trim()
       });
 
-      if (queryError) throw queryError;
+      if (queryError) {
+        console.error('Query error:', queryError);
+        // 区分不同类型的错误
+        if (queryError.code === 'PGRST202') {
+          // 函数不存在 - 服务配置问题
+          setError(t.signup.serviceUnavailable);
+        } else if (queryError.message?.includes('network') || queryError.message?.includes('fetch')) {
+          setError(t.signup.networkError);
+        } else {
+          setError(t.signup.error);
+        }
+        return;
+      }
 
       if (!data || data.length === 0) {
         setError(t.signup.notFound);
       } else {
         setStats(data[0]);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Error fetching stats:', err);
-      setError(t.signup.error);
+      // 检查是否是网络错误
+      if (err instanceof TypeError && err.message?.includes('fetch')) {
+        setError(t.signup.networkError);
+      } else {
+        setError(t.signup.error);
+      }
     } finally {
       setLoading(false);
     }

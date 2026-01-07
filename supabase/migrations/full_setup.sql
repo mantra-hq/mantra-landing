@@ -16,9 +16,7 @@ CREATE TABLE IF NOT EXISTS public.subscribers (
   ip_hash text
 );
 
--- 创建索引
-CREATE INDEX IF NOT EXISTS idx_subscribers_referral_code ON public.subscribers(referral_code);
-CREATE INDEX IF NOT EXISTS idx_subscribers_referred_by ON public.subscribers(referred_by);
+-- 注意：不需要额外创建索引，UNIQUE 约束已自动创建索引
 
 -- ============================================
 -- 2. 启用 RLS
@@ -40,6 +38,13 @@ GRANT ALL ON public.subscribers TO service_role;
 -- ============================================
 -- 4. 创建 RLS 策略
 -- ============================================
+-- 先删除已存在的策略（如果有）
+DROP POLICY IF EXISTS "Public can subscribe with email" ON public.subscribers;
+DROP POLICY IF EXISTS "Select own record by email or referral code" ON public.subscribers;
+DROP POLICY IF EXISTS "Update referral count by code" ON public.subscribers;
+DROP POLICY IF EXISTS "Anyone can subscribe" ON public.subscribers;
+DROP POLICY IF EXISTS "Subscribers can read own data by referral code" ON public.subscribers;
+
 -- 允许匿名用户插入新订阅
 CREATE POLICY "Public can subscribe with email"
   ON public.subscribers
@@ -71,7 +76,11 @@ CREATE POLICY "Update referral count by code"
 -- 5. 创建推荐计数触发器
 -- ============================================
 CREATE OR REPLACE FUNCTION public.increment_referral_count()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
 BEGIN
   IF NEW.referred_by IS NOT NULL THEN
     UPDATE public.subscribers
@@ -80,7 +89,7 @@ BEGIN
   END IF;
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
 
 -- 创建触发器
 DROP TRIGGER IF EXISTS on_new_subscriber ON public.subscribers;
@@ -92,11 +101,12 @@ CREATE TRIGGER on_new_subscriber
 -- ============================================
 -- 6. 创建邮箱查询函数 (RPC)
 -- ============================================
-CREATE OR REPLACE FUNCTION public.check_email_exists(input_email text)
+CREATE OR REPLACE FUNCTION public.get_referral_stats_by_email(p_email text)
 RETURNS TABLE (
-  exists_flag boolean,
+  email text,
   referral_code text,
-  referral_count integer
+  referral_count integer,
+  created_at timestamptz
 )
 LANGUAGE plpgsql
 SECURITY DEFINER
@@ -105,23 +115,19 @@ AS $$
 BEGIN
   RETURN QUERY
   SELECT
-    true as exists_flag,
+    s.email,
     s.referral_code,
-    s.referral_count
+    s.referral_count,
+    s.created_at
   FROM public.subscribers s
-  WHERE s.email = input_email
+  WHERE s.email = p_email
   LIMIT 1;
-
-  -- 如果没有找到记录，返回不存在
-  IF NOT FOUND THEN
-    RETURN QUERY SELECT false, NULL::text, NULL::integer;
-  END IF;
 END;
 $$;
 
 -- 授予函数执行权限
-GRANT EXECUTE ON FUNCTION public.check_email_exists(text) TO anon;
-GRANT EXECUTE ON FUNCTION public.check_email_exists(text) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.get_referral_stats_by_email(text) TO anon;
+GRANT EXECUTE ON FUNCTION public.get_referral_stats_by_email(text) TO authenticated;
 
 -- ============================================
 -- 7. 更新表统计信息
