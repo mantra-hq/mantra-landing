@@ -5,6 +5,7 @@ import { Features } from './components/Features';
 import { SupportedTools } from './components/SupportedTools';
 import { MakerStory } from './components/MakerStory';
 import { EmailSignup } from './components/EmailSignup';
+import { ReferralStatus } from './components/ReferralStatus';
 import { Footer } from './components/Footer';
 import { LanguageToggle } from './components/LanguageToggle';
 
@@ -24,6 +25,9 @@ function AppContent() {
       <MakerStory />
       <div ref={signupRef}>
         <EmailSignup />
+      </div>
+      <div className="border-t border-white/5">
+        <ReferralStatus />
       </div>
       <Footer />
     </div>
