@@ -26,3 +26,7 @@ dist-ssr
 .claude/
 .mcp.json
 docs-dist/
+
+# VitePress cache and temp files
+docs/.vitepress/cache/
+docs/.vitepress/.temp/
