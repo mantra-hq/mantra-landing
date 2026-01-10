@@ -1,9 +1,10 @@
-import { Github, Twitter, Mail } from 'lucide-react';
+import { Github, Twitter, Mail, BookOpen } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import mantraIcon from '../assets/icon-mantra.png';
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const docsUrl = lang === 'zh' ? '/docs/' : '/docs/en/';
 
   return (
     <footer className="py-12 border-t border-white/5">
@@ -16,6 +17,10 @@ export function Footer() {
 
           <div className="flex items-center gap-6 text-sm text-gray-500">
             <a href="#features" className="hover:text-white transition-colors">{t.footer.features}</a>
+            <a href={docsUrl} className="hover:text-white transition-colors flex items-center gap-1">
+              <BookOpen className="w-4 h-4" />
+              {t.footer.docs}
+            </a>
             <a href="#signup" className="hover:text-white transition-colors">{t.footer.earlyAccess}</a>
           </div>
 

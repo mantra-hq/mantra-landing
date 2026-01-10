@@ -105,6 +105,7 @@ const translations = {
     },
     footer: {
       features: 'Features',
+      docs: 'Docs',
       earlyAccess: 'Early Access',
       tagline: 'Local-first. Privacy-focused. Built for developers.',
     },
@@ -211,13 +212,18 @@ const translations = {
     },
     footer: {
       features: '功能特性',
+      docs: '文档',
       earlyAccess: '抢先体验',
       tagline: '本地优先。注重隐私。为开发者打造。',
     },
   },
 } as const;
 
-type TranslationType = typeof translations.en;
+// Use structural type instead of literal type to allow different translations
+type DeepString<T> = {
+  [K in keyof T]: T[K] extends object ? DeepString<T[K]> : string;
+};
+type TranslationType = DeepString<typeof translations.en>;
 
 interface I18nContextType {
   lang: Language;
