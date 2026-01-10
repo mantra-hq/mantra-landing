@@ -30,4 +30,3 @@ docs-dist/
 # VitePress cache and temp files
 docs/.vitepress/cache/
 docs/.vitepress/.temp/
-public/docs/
