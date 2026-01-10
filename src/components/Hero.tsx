@@ -1,4 +1,4 @@
-import { Play, Clock, Sparkles } from 'lucide-react';
+import { Play, Clock, Sparkles, BookOpen } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import { RollingToolName } from './RollingToolName';
 import mantraIcon from '../assets/icon-mantra.png';
@@ -8,7 +8,8 @@ interface HeroProps {
 }
 
 export function Hero({ onCtaClick }: HeroProps) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const docsUrl = lang === 'zh' ? '/docs/index.html' : '/docs/en/index.html';
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -64,6 +65,13 @@ export function Hero({ onCtaClick }: HeroProps) {
             >
               <Sparkles className="w-5 h-5 text-secondary" />
               {t.hero.exploreFeatures}
+            </a>
+            <a
+              href={docsUrl}
+              className="px-6 py-4 text-gray-400 hover:text-white font-medium transition-all duration-300 flex items-center gap-2"
+            >
+              <BookOpen className="w-5 h-5" />
+              {t.hero.docs}
             </a>
           </div>
         </div>
