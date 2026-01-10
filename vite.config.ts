@@ -7,4 +7,6 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  // Disable SPA fallback for /docs/ path - let it serve static files
+  appType: 'mpa',
 });

@@ -4,7 +4,7 @@ import mantraIcon from '../assets/icon-mantra.png';
 
 export function Footer() {
   const { t, lang } = useI18n();
-  const docsUrl = lang === 'zh' ? '/docs/' : '/docs/en/';
+  const docsUrl = lang === 'zh' ? '/docs/index.html' : '/docs/en/index.html';
 
   return (
     <footer className="py-12 border-t border-white/5">
