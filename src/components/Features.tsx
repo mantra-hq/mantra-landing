@@ -1,4 +1,4 @@
-import { Play, Brain, BarChart3, Shield, FileCode, Zap, Database, Lock, Eye } from 'lucide-react';
+import { Clock, Search, ShieldCheck, Shield, GitCommit, FileCode, MousePointer, Lock, Cpu, Monitor, Eye, ScanLine, FileWarning } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 
 export function Features() {
@@ -6,29 +6,42 @@ export function Features() {
 
   const features = [
     {
-      id: 'replay',
-      title: t.features.replay.title,
-      tagline: t.features.replay.tagline,
-      description: t.features.replay.description,
-      icon: Play,
+      id: 'timeTravel',
+      title: t.features.timeTravel.title,
+      tagline: t.features.timeTravel.tagline,
+      description: t.features.timeTravel.description,
+      icon: Clock,
       color: 'primary',
       details: [
-        { icon: Eye, text: t.features.replay.detail1 },
-        { icon: FileCode, text: t.features.replay.detail2 },
-        { icon: Zap, text: t.features.replay.detail3 },
+        { icon: MousePointer, text: t.features.timeTravel.detail1 },
+        { icon: GitCommit, text: t.features.timeTravel.detail2 },
+        { icon: FileCode, text: t.features.timeTravel.detail3 },
       ],
     },
     {
-      id: 'refine',
-      title: t.features.refine.title,
-      tagline: t.features.refine.tagline,
-      description: t.features.refine.description,
-      icon: Brain,
+      id: 'search',
+      title: t.features.search.title,
+      tagline: t.features.search.tagline,
+      description: t.features.search.description,
+      icon: Search,
       color: 'secondary',
       details: [
-        { icon: Brain, text: t.features.refine.detail1 },
-        { icon: Database, text: t.features.refine.detail2 },
-        { icon: BarChart3, text: t.features.refine.detail3 },
+        { icon: Search, text: t.features.search.detail1 },
+        { icon: Eye, text: t.features.search.detail2 },
+        { icon: MousePointer, text: t.features.search.detail3 },
+      ],
+    },
+    {
+      id: 'security',
+      title: t.features.security.title,
+      tagline: t.features.security.tagline,
+      description: t.features.security.description,
+      icon: ShieldCheck,
+      color: 'primary',
+      details: [
+        { icon: ScanLine, text: t.features.security.detail1 },
+        { icon: FileWarning, text: t.features.security.detail2 },
+        { icon: ShieldCheck, text: t.features.security.detail3 },
       ],
     },
     {
@@ -37,11 +50,11 @@ export function Features() {
       tagline: t.features.privacy.tagline,
       description: t.features.privacy.description,
       icon: Shield,
-      color: 'primary',
+      color: 'secondary',
       details: [
         { icon: Lock, text: t.features.privacy.detail1 },
-        { icon: Eye, text: t.features.privacy.detail2 },
-        { icon: Shield, text: t.features.privacy.detail3 },
+        { icon: Cpu, text: t.features.privacy.detail2 },
+        { icon: Monitor, text: t.features.privacy.detail3 },
       ],
     },
   ];
@@ -138,35 +151,59 @@ interface FeatureVisualProps {
 function FeatureVisual({ featureId, glowClass }: FeatureVisualProps) {
   const { t } = useI18n();
 
-  if (featureId === 'replay') {
+  if (featureId === 'timeTravel') {
     return (
       <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
         <div className="space-y-4">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-dark-100 flex items-center justify-center text-xs text-gray-500">U</div>
-            <div className="flex-1 p-3 rounded-xl bg-dark-100 text-sm text-gray-300">
-              Add a dark mode toggle to the settings page
+          {/* Timeline with markers */}
+          <div className="relative py-4">
+            <div className="h-2 bg-dark-200 rounded-full overflow-hidden">
+              <div className="h-full w-3/5 bg-gradient-to-r from-primary to-secondary rounded-full" />
             </div>
+            {/* Draggable indicator */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-primary cursor-grab"
+              style={{ left: '60%', transform: 'translate(-50%, -50%)' }}
+            />
+            {/* User message markers (blue dots) */}
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '10%' }} />
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '35%' }} />
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '75%' }} />
+            {/* Git commit markers (green squares) */}
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '25%', transform: 'translate(-50%, -50%)' }} />
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '55%', transform: 'translate(-50%, -50%)' }} />
+            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '90%', transform: 'translate(-50%, -50%)' }} />
           </div>
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-xs text-primary">AI</div>
-            <div className="flex-1 space-y-2">
-              <div className="p-3 rounded-xl border border-white/5 text-sm text-gray-400">
-                I'll add a dark mode toggle. Let me first check the existing settings...
-              </div>
-              <div className="flex items-center gap-2 text-xs text-primary">
-                <FileCode className="w-3 h-3" />
-                <span className="font-mono">Read settings.tsx</span>
-              </div>
-            </div>
-          </div>
-          <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-500">{t.features.stepOf.replace('{current}', '3').replace('{total}', '12')}</span>
+          
+          {/* Legend */}
+          <div className="flex items-center justify-center gap-6 text-xs text-gray-500">
             <div className="flex items-center gap-2">
-              <button className="p-1.5 rounded bg-dark-100 hover:bg-dark-50 transition-colors">
-                <Play className="w-3 h-3 text-primary" />
-              </button>
+              <div className="w-2.5 h-2.5 bg-primary rounded-full" />
+              <span>User Message</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2.5 h-2.5 bg-secondary rounded-sm" />
+              <span>Git Commit</span>
+            </div>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          
+          {/* Code preview panel */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="p-3 rounded-lg bg-dark-300/50">
+              <div className="text-xs text-gray-500 mb-2 font-mono">src/App.tsx</div>
+              <div className="text-xs text-gray-400 font-mono space-y-1">
+                <div><span className="text-secondary">+</span> const [dark, setDark]</div>
+                <div><span className="text-secondary">+</span> useState(false)</div>
+              </div>
+            </div>
+            <div className="p-3 rounded-lg bg-dark-300/50">
+              <div className="flex items-center gap-2 mb-2">
+                <GitCommit className="w-3 h-3 text-secondary" />
+                <span className="text-xs text-secondary font-mono">a3f2c1d</span>
+              </div>
+              <div className="text-xs text-gray-400">Add dark mode toggle</div>
             </div>
           </div>
         </div>
@@ -174,39 +211,86 @@ function FeatureVisual({ featureId, glowClass }: FeatureVisualProps) {
     );
   }
 
-  if (featureId === 'refine') {
+  if (featureId === 'search') {
     return (
       <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="p-4 rounded-xl bg-dark-200/50">
-            <div className="text-3xl font-bold text-secondary mb-1">23</div>
-            <div className="text-xs text-gray-500">{t.features.promptsSaved}</div>
+        <div className="space-y-4">
+          {/* Search bar */}
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-dark-200/50 border border-secondary/30">
+            <Search className="w-4 h-4 text-secondary" />
+            <span className="text-sm text-gray-300">authentication error</span>
+            <kbd className="ml-auto px-2 py-0.5 rounded bg-dark-300 text-xs text-gray-500">⌘K</kbd>
           </div>
-          <div className="p-4 rounded-xl bg-dark-200/50">
-            <div className="text-3xl font-bold text-primary mb-1">156k</div>
-            <div className="text-xs text-gray-500">{t.features.totalTokens}</div>
-          </div>
-        </div>
-        <div className="space-y-3">
-          <div className="text-xs text-gray-500 uppercase tracking-wide">{t.features.toolUsage}</div>
+          
+          {/* Search results */}
           <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs text-gray-500">
+              <span>3 {t.features.searchResults}</span>
+            </div>
             {[
-              { name: 'Read', percent: 45, color: 'bg-primary' },
-              { name: 'Edit', percent: 30, color: 'bg-secondary' },
-              { name: 'Bash', percent: 15, color: 'bg-primary/60' },
-              { name: 'Grep', percent: 10, color: 'bg-secondary/60' },
-            ].map((tool) => (
-              <div key={tool.name} className="flex items-center gap-3">
-                <span className="w-12 text-xs text-gray-400 font-mono">{tool.name}</span>
-                <div className="flex-1 h-2 bg-dark-300 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full ${tool.color} rounded-full transition-all duration-500`}
-                    style={{ width: `${tool.percent}%` }}
-                  />
+              { project: 'auth-service', message: '...fix <mark>authentication error</mark> in login...', time: '2h ago' },
+              { project: 'api-gateway', message: '...handle <mark>authentication error</mark> response...', time: '1d ago' },
+              { project: 'user-service', message: '...debug <mark>authentication error</mark> logs...', time: '3d ago' },
+            ].map((result, i) => (
+              <div key={i} className="p-3 rounded-lg bg-dark-300/50 hover:bg-dark-300/70 transition-colors cursor-pointer">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs text-secondary font-mono">{result.project}</span>
+                  <span className="text-xs text-gray-600">{result.time}</span>
                 </div>
-                <span className="w-8 text-xs text-gray-500 text-right">{tool.percent}%</span>
+                <div 
+                  className="text-sm text-gray-400 [&_mark]:bg-secondary/30 [&_mark]:text-secondary [&_mark]:px-0.5 [&_mark]:rounded"
+                  dangerouslySetInnerHTML={{ __html: result.message }}
+                />
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (featureId === 'security') {
+    return (
+      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
+        <div className="space-y-4">
+          {/* Scan result header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <ScanLine className="w-5 h-5 text-amber-400" />
+              <span className="font-medium text-amber-400">3 {t.features.sensitiveFound}</span>
+            </div>
+            <button className="px-3 py-1.5 rounded-lg bg-primary/20 text-primary text-sm hover:bg-primary/30 transition-colors">
+              {t.features.redactAll}
+            </button>
+          </div>
+          
+          {/* Sensitive items list */}
+          <div className="space-y-2">
+            {[
+              { type: t.features.apiKey, value: 'sk-proj-****...****', line: 'L23' },
+              { type: t.features.password, value: 'DB_PASS=****', line: 'L45' },
+              { type: t.features.token, value: 'ghp_****...****', line: 'L67' },
+            ].map((item, i) => (
+              <div key={i} className="p-3 rounded-lg bg-dark-300/50 border border-amber-400/20">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <FileWarning className="w-4 h-4 text-amber-400" />
+                    <span className="text-sm text-gray-300">{item.type}</span>
+                    <span className="text-xs text-gray-600 font-mono">{item.line}</span>
+                  </div>
+                  <span className="text-xs text-gray-500 font-mono">{item.value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Diff preview */}
+          <div className="p-3 rounded-lg bg-dark-200/50 border border-primary/20">
+            <div className="text-xs text-gray-500 mb-2">Diff Preview</div>
+            <div className="text-xs font-mono space-y-1">
+              <div className="text-red-400/80">- api_key = "sk-proj-abc123xyz"</div>
+              <div className="text-secondary">+ api_key = "[REDACTED]"</div>
+            </div>
           </div>
         </div>
       </div>
@@ -217,22 +301,28 @@ function FeatureVisual({ featureId, glowClass }: FeatureVisualProps) {
     <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-primary" />
+          <Shield className="w-5 h-5 text-secondary" />
           <span className="font-medium">{t.features.privacyMode}</span>
         </div>
         <div className="px-2 py-1 rounded-full bg-secondary/20 text-secondary text-xs">{t.features.active}</div>
       </div>
       <div className="space-y-4">
-        <div className="p-4 rounded-xl bg-dark-200/50 border border-primary/20">
+        <div className="p-4 rounded-xl bg-dark-200/50 border border-secondary/20">
           <div className="flex items-center gap-2 mb-2">
-            <Lock className="w-4 h-4 text-primary" />
+            <Lock className="w-4 h-4 text-secondary" />
             <span className="text-sm text-gray-300">{t.features.localStorageOnly}</span>
           </div>
           <div className="text-xs text-gray-500">
             ~/Library/Application Support/Mantra/sessions/
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
+          <div className="p-3 rounded-lg bg-dark-300/50 text-center">
+            <div className="flex items-center justify-center mb-1">
+              <Cpu className="w-4 h-4 text-secondary" />
+            </div>
+            <div className="text-xs text-gray-500">Rust</div>
+          </div>
           <div className="p-3 rounded-lg bg-dark-300/50 text-center">
             <div className="text-lg font-bold text-white">0</div>
             <div className="text-xs text-gray-500">{t.features.cloudUploads}</div>

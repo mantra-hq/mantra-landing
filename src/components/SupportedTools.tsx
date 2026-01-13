@@ -9,7 +9,7 @@ const tools = [
   { name: 'Claude Code', icon: claudeCodeIcon, status: 'supported' },
   { name: 'Cursor', icon: cursorIcon, status: 'supported' },
   { name: 'Gemini CLI', icon: geminiIcon, status: 'supported' },
-  { name: 'Codex', icon: codexIcon, status: 'coming' },
+  { name: 'Codex', icon: codexIcon, status: 'supported' },
   { name: 'Antigravity', icon: antigravityIcon, status: 'coming' },
 ];
 
