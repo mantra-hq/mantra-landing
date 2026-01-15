@@ -12,6 +12,7 @@ Mantra 是一款 **AI 编程过程的时光旅行工具**，让你可以像看�
 - Gemini CLI
 - Cursor
 - Codex
+- Antigravity（即将支持）
 
 ### 核心功能
 
