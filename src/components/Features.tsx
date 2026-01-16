@@ -1,4 +1,4 @@
-import { Clock, Search, ShieldCheck, Shield, GitCommit, FileCode, MousePointer, Lock, Cpu, Monitor, Eye, ScanLine, FileWarning } from 'lucide-react';
+import { Clock, Search, ShieldCheck, Shield, GitCommit, FileCode, MousePointer, Lock, Cpu, Monitor, Eye, ScanLine, FileWarning, BarChart3, Layers, Wrench, FolderOpen, MessageSquare } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 
 export function Features() {
@@ -55,6 +55,19 @@ export function Features() {
         { icon: Lock, text: t.features.privacy.detail1 },
         { icon: Cpu, text: t.features.privacy.detail2 },
         { icon: Monitor, text: t.features.privacy.detail3 },
+      ],
+    },
+    {
+      id: 'insights',
+      title: t.features.insights.title,
+      tagline: t.features.insights.tagline,
+      description: t.features.insights.description,
+      icon: BarChart3,
+      color: 'secondary',
+      details: [
+        { icon: Layers, text: t.features.insights.detail1 },
+        { icon: FolderOpen, text: t.features.insights.detail2 },
+        { icon: Wrench, text: t.features.insights.detail3 },
       ],
     },
   ];
@@ -290,6 +303,62 @@ function FeatureVisual({ featureId, glowClass }: FeatureVisualProps) {
             <div className="text-xs font-mono space-y-1">
               <div className="text-red-400/80">- api_key = "sk-proj-abc123xyz"</div>
               <div className="text-secondary">+ api_key = "[REDACTED]"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (featureId === 'insights') {
+    return (
+      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
+        <div className="space-y-4">
+          {/* Token Usage Header */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-gray-400">{t.features.tokenUsage}</span>
+            <span className="text-2xl font-bold text-white">12,847</span>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="h-3 bg-dark-200 rounded-full overflow-hidden">
+            <div className="h-full w-4/5 bg-gradient-to-r from-secondary to-primary rounded-full" />
+          </div>
+
+          {/* Token Breakdown */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
+              <div className="text-lg font-bold text-primary">6,234</div>
+              <div className="text-xs text-gray-500">{t.features.input}</div>
+              <div className="text-xs text-gray-600">48.5%</div>
+            </div>
+            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
+              <div className="text-lg font-bold text-secondary">4,512</div>
+              <div className="text-xs text-gray-500">{t.features.output}</div>
+              <div className="text-xs text-gray-600">35.1%</div>
+            </div>
+            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
+              <div className="text-lg font-bold text-amber-400">2,101</div>
+              <div className="text-xs text-gray-500">{t.features.cache}</div>
+              <div className="text-xs text-gray-600">16.4%</div>
+            </div>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+          {/* Stats Row */}
+          <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center gap-2 text-gray-400">
+              <FolderOpen className="w-4 h-4 text-secondary" />
+              <span>12 {t.features.sessions}</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
+              <MessageSquare className="w-4 h-4 text-primary" />
+              <span>847 {t.features.messages}</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
+              <Wrench className="w-4 h-4 text-amber-400" />
+              <span>234 {t.features.toolCalls}</span>
             </div>
           </div>
         </div>

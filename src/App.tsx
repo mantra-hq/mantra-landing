@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { I18nProvider } from './lib/i18n';
+import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
 import { SupportedTools } from './components/SupportedTools';
@@ -7,7 +8,6 @@ import { MakerStory } from './components/MakerStory';
 import { EmailSignup } from './components/EmailSignup';
 import { ReferralStatus } from './components/ReferralStatus';
 import { Footer } from './components/Footer';
-import { LanguageToggle } from './components/LanguageToggle';
 import { StarfieldBackground } from './components/StarfieldBackground';
 
 function AppContent() {
@@ -21,12 +21,12 @@ function AppContent() {
     <div className="min-h-screen bg-dark-600 relative">
       <StarfieldBackground />
       <div className="relative z-10">
-        <LanguageToggle />
+        <Header />
         <Hero onCtaClick={scrollToSignup} />
         <SupportedTools />
         <Features />
         <MakerStory />
-        <div ref={signupRef}>
+        <div ref={signupRef} id="signup">
           <EmailSignup />
         </div>
         <div className="border-t border-white/5">
