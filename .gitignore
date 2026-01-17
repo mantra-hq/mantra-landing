@@ -26,12 +26,11 @@ dist-ssr
 .claude/
 .mcp.json
 
-# VitePress cache and temp files
-docs/.vitepress/cache/
-docs/.vitepress/.temp/
+# Docs and blog have been moved to separate repos
+docs/
 docs-dist/
-
-blog/.vitepress/cache/
-blog/.vitepress/.temp/
+blog/
 blog-dist/
+public/docs/
+public/blog/
 
