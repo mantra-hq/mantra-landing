@@ -26,7 +26,8 @@ Mantra 是一款 **AI 编程过程的时光旅行工具**，让你可以像看�
 - **构建工具**: Vite
 - **样式**: Tailwind CSS
 - **文档**: VitePress
-- **后端**: Supabase（用户注册和推荐系统）
+- **后端 API**: Cloudflare Pages Functions（边缘计算）
+- **数据库**: Supabase（用户注册和推荐系统）
 - **国际化**: 自定义 React Context（中/英双语）
 
 ## 项目结构
@@ -45,10 +46,15 @@ mantra-landing/
 │   │   └── LanguageToggle.tsx  # 语言切换
 │   ├── lib/
 │   │   ├── i18n.tsx        # 国际化配置
-│   │   └── supabase.ts     # Supabase 客户端
+│   │   └── supabase.ts     # 工具函数（推荐码生成等）
 │   ├── assets/             # 静态资源
 │   ├── App.tsx             # 应用入口
 │   └── main.tsx            # React 挂载点
+├── functions/              # Cloudflare Pages Functions（后端 API）
+│   ├── api/
+│   │   ├── subscribe.ts        # 用户注册 API
+│   │   └── referral-stats.ts   # 推荐统计查询 API
+│   └── tsconfig.json
 ├── docs/                   # VitePress 文档
 │   ├── .vitepress/
 │   │   └── config.ts       # VitePress 配置
@@ -125,6 +131,29 @@ VitePress 文档使用 `locales` 配置：
 - 英文文档：`/docs/en/`
 
 ## 部署
+
+### Cloudflare Pages 环境变量
+
+部署到 Cloudflare Pages 后，需配置 Secrets：
+
+```bash
+# 通过 Wrangler CLI 设置（推荐）
+npx wrangler pages secret put SUPABASE_URL --project-name mantra-landing
+npx wrangler pages secret put SUPABASE_SERVICE_ROLE_KEY --project-name mantra-landing
+```
+
+或在 Dashboard → Settings → Variables and Secrets 中添加（Type 选 Secret）。
+
+### 本地开发
+
+创建 `.dev.vars` 文件（已在 `.gitignore` 中忽略）：
+
+```
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=xxx
+```
+
+### 部署路径
 
 文档站部署基础路径为 `/docs/`，输出到 `docs-dist/` 目录，避免与 React 构建冲突。
 

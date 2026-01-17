@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Search, Copy, Check } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
-import { supabase } from '../lib/supabase';
 
 interface ReferralStats {
   email: string;
@@ -27,32 +26,28 @@ export function ReferralStatus() {
     setStats(null);
 
     try {
-      const { data, error: queryError } = await supabase.rpc('get_referral_stats_by_email', {
-        p_email: email.toLowerCase().trim()
+      const response = await fetch('/api/referral-stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.toLowerCase().trim() }),
       });
 
-      if (queryError) {
-        console.error('Query error:', queryError);
-        // 区分不同类型的错误
-        if (queryError.code === 'PGRST202') {
-          // 函数不存在 - 服务配置问题
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (result.error === 'not_found') {
+          setError(t.signup.notFound);
+        } else if (result.error === 'service_unavailable') {
           setError(t.signup.serviceUnavailable);
-        } else if (queryError.message?.includes('network') || queryError.message?.includes('fetch')) {
-          setError(t.signup.networkError);
         } else {
           setError(t.signup.error);
         }
         return;
       }
 
-      if (!data || data.length === 0) {
-        setError(t.signup.notFound);
-      } else {
-        setStats(data[0]);
-      }
+      setStats(result.data);
     } catch (err: unknown) {
       console.error('Error fetching stats:', err);
-      // 检查是否是网络错误
       if (err instanceof TypeError && err.message?.includes('fetch')) {
         setError(t.signup.networkError);
       } else {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Mail, Check, Copy, Users, Gift, Loader2 } from 'lucide-react';
-import { supabase, generateReferralCode, getReferralFromUrl } from '../lib/supabase';
+import { generateReferralCode, getReferralFromUrl } from '../lib/supabase';
 import { useI18n } from '../lib/i18n';
 
 interface SignupState {
@@ -25,26 +25,36 @@ export function EmailSignup() {
 
     const referralCode = generateReferralCode();
 
-    const { error } = await supabase.from('subscribers').insert({
-      email,
-      referral_code: referralCode,
-      referred_by: referredBy,
-    });
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          referral_code: referralCode,
+          referred_by: referredBy,
+        }),
+      });
 
-    if (error) {
-      if (error.code === '23505') {
-        setState({ status: 'error', error: t.signup.alreadyRegistered });
-      } else {
-        setState({ status: 'error', error: t.signup.error });
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (result.error === 'already_registered') {
+          setState({ status: 'error', error: t.signup.alreadyRegistered });
+        } else {
+          setState({ status: 'error', error: t.signup.error });
+        }
+        return;
       }
-      return;
-    }
 
-    setState({
-      status: 'success',
-      referralCode,
-      referralCount: 0,
-    });
+      setState({
+        status: 'success',
+        referralCode,
+        referralCount: 0,
+      });
+    } catch {
+      setState({ status: 'error', error: t.signup.error });
+    }
   };
 
   const copyReferralLink = () => {

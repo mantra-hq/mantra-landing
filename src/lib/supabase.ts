@@ -1,10 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
+/**
+ * 生成推荐码
+ */
 export function generateReferralCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
@@ -14,6 +10,9 @@ export function generateReferralCode(): string {
   return code;
 }
 
+/**
+ * 从 URL 获取推荐码参数
+ */
 export function getReferralFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search);
   return params.get('ref');
