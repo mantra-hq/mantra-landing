@@ -161,7 +161,7 @@ SUPABASE_SERVICE_ROLE_KEY=xxx
 
 Supabase 免费版会在 7 天不活跃后暂停实例。项目配置了 GitHub Actions 定时任务来保持实例活跃。
 
-**配置 GitHub Secrets**（Settings → Secrets and variables → Actions）：
+**配置 GitHub Repository Secrets**（Settings → Secrets and variables → Actions）：
 
 | Secret 名称 | 值 |
 |------------|---|

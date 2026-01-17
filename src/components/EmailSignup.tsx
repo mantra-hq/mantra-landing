@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Check, Copy, Users, Gift, Loader2 } from 'lucide-react';
+import { Mail, Check, Copy, Users, Gift, Loader2, Infinity, Briefcase, MessageCircle } from 'lucide-react';
 import { generateReferralCode, getReferralFromUrl } from '../lib/supabase';
 import { useI18n } from '../lib/i18n';
 
@@ -76,15 +76,15 @@ export function EmailSignup() {
     <section id="signup" className="py-32 relative">
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
 
-      <div className="relative max-w-2xl mx-auto px-6">
+      <div className="relative max-w-4xl mx-auto px-6">
         {referredBy && (
-          <div id="referral-banner" className="mb-8 p-4 rounded-xl glass border-secondary/30 text-center">
+          <div id="referral-banner" className="mb-8 p-4 rounded-xl glass border-secondary/30 text-center max-w-2xl mx-auto">
             <Gift className="w-5 h-5 text-secondary inline mr-2" />
             <span className="text-gray-300">{t.signup.referralBanner}</span>
           </div>
         )}
 
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             {t.signup.title} <span className="text-gradient">{t.signup.titleHighlight}</span>
           </h2>
@@ -93,54 +93,101 @@ export function EmailSignup() {
           </p>
         </div>
 
-        {state.status === 'success' ? (
-          <SuccessState
-            referralCode={state.referralCode!}
-            referralCount={state.referralCount!}
-            copied={copied}
-            onCopy={copyReferralLink}
-          />
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t.signup.placeholder}
-                className="w-full pl-12 pr-4 py-4 bg-dark-300 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
-                disabled={state.status === 'loading'}
-              />
-            </div>
+        {/* Signup Form - Centered */}
+        <div className="max-w-xl mx-auto mb-12">
+          {state.status === 'success' ? (
+            <SuccessState
+              referralCode={state.referralCode!}
+              referralCount={state.referralCount!}
+              copied={copied}
+              onCopy={copyReferralLink}
+            />
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t.signup.placeholder}
+                    className="w-full pl-12 pr-4 py-4 bg-dark-300 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
+                    disabled={state.status === 'loading'}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={state.status === 'loading' || !email}
+                  className="px-6 py-4 bg-primary hover:bg-primary-600 disabled:bg-primary/50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 glow-primary whitespace-nowrap"
+                >
+                  {state.status === 'loading' ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>
+                      <Mail className="w-5 h-5" />
+                      {t.signup.getEarlyAccess}
+                    </>
+                  )}
+                </button>
+              </div>
 
-            {state.status === 'error' && (
-              <p className="text-red-400 text-sm">{state.error}</p>
-            )}
-
-            <button
-              type="submit"
-              disabled={state.status === 'loading' || !email}
-              className="w-full py-4 bg-primary hover:bg-primary-600 disabled:bg-primary/50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 glow-primary"
-            >
-              {state.status === 'loading' ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  {t.signup.joining}
-                </>
-              ) : (
-                <>
-                  <Mail className="w-5 h-5" />
-                  {t.signup.getEarlyAccess}
-                </>
+              {state.status === 'error' && (
+                <p className="text-red-400 text-sm text-center">{state.error}</p>
               )}
-            </button>
 
-            <p className="text-center text-sm text-gray-500">
-              {t.signup.noSpam}
-            </p>
-          </form>
-        )}
+              <p className="text-center text-sm text-gray-500">
+                {t.signup.noSpam}
+              </p>
+            </form>
+          )}
+        </div>
+
+        {/* Early bird section header */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-white/20" />
+          <div className="flex items-center gap-2 text-gray-300 text-sm font-medium">
+            <Gift className="w-4 h-4 text-secondary" />
+            <span>{t.signup.earlyBirdTitle}</span>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent via-white/10 to-white/20" />
+        </div>
+
+        {/* Entry condition banner */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="p-4 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-center">
+            <p className="text-gray-300 text-sm mb-1">{t.signup.earlyBirdCondition}</p>
+            <p className="text-lg font-semibold text-gradient">{t.signup.earlyBirdReward}</p>
+            <p className="text-xs text-gray-500 mt-1">{t.signup.earlyBirdLimited}</p>
+          </div>
+        </div>
+
+        {/* Benefits - Horizontal 3-column */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="glass-dark rounded-xl p-5 text-center">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-primary/20 flex items-center justify-center mb-4">
+              <Infinity className="w-6 h-6 text-primary" />
+            </div>
+            <h4 className="font-semibold text-white mb-2">{t.signup.benefitLifetime}</h4>
+            <p className="text-sm text-gray-400">{t.signup.benefitLifetimeDesc}</p>
+          </div>
+
+          <div className="glass-dark rounded-xl p-5 text-center">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
+              <Briefcase className="w-6 h-6 text-secondary" />
+            </div>
+            <h4 className="font-semibold text-white mb-2">{t.signup.benefitCommercial}</h4>
+            <p className="text-sm text-gray-400">{t.signup.benefitCommercialDesc}</p>
+          </div>
+
+          <div className="glass-dark rounded-xl p-5 text-center">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+              <MessageCircle className="w-6 h-6 text-purple-400" />
+            </div>
+            <h4 className="font-semibold text-white mb-2">{t.signup.benefitCommunity}</h4>
+            <p className="text-sm text-gray-400">{t.signup.benefitCommunityDesc}</p>
+          </div>
+        </div>
       </div>
     </section>
   );
