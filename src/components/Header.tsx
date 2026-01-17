@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Download } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
+import { getLocalizedUrls, PAGE_PATHS } from '../lib/config';
 import { LanguageToggle } from './LanguageToggle';
 import mantraIcon from '../assets/icon-mantra.png';
 
@@ -10,9 +11,10 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const docsUrl = lang === 'zh' ? '/docs/index.html' : '/docs/en/index.html';
-  const blogUrl = lang === 'zh' ? '/blog/zh/' : '/blog/';
-  const faqUrl = lang === 'zh' ? '/docs/about/faq.html' : '/docs/en/about/faq.html';
+  const urls = getLocalizedUrls(lang);
+  const docsUrl = urls.docs;
+  const blogUrl = urls.blog;
+  const faqUrl = `${urls.about}${PAGE_PATHS.faq}`;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);

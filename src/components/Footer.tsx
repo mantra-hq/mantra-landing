@@ -1,21 +1,22 @@
 import { Twitter, Mail } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
+import { getLocalizedUrls, PAGE_PATHS } from '../lib/config';
 import mantraIcon from '../assets/icon-mantra.png';
 
 export function Footer() {
   const { t, lang } = useI18n();
 
-  const legalBaseUrl = lang === 'zh' ? '/docs/about' : '/docs/en/about';
+  const urls = getLocalizedUrls(lang);
 
   const productLinks = [
     { label: t.footer.features, href: '#features' },
-    { label: t.footer.security, href: `${legalBaseUrl}/security-policy.html` },
+    { label: t.footer.security, href: `${urls.about}${PAGE_PATHS.security}` },
   ];
 
   const resourceLinks = [
-    { label: t.footer.docs, href: lang === 'zh' ? '/docs/index.html' : '/docs/en/index.html' },
-    { label: t.footer.faq, href: `${legalBaseUrl}/faq.html` },
-    { label: t.footer.license, href: `${legalBaseUrl}/license-overview.html` },
+    { label: t.footer.docs, href: urls.docs },
+    { label: t.footer.faq, href: `${urls.about}${PAGE_PATHS.faq}` },
+    { label: t.footer.license, href: `${urls.about}${PAGE_PATHS.license}` },
   ];
 
   const contactLinks = [
@@ -108,14 +109,14 @@ export function Footer() {
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <span>{t.footer.copyright}</span>
               <a
-                href={`${legalBaseUrl}/privacy-policy.html`}
+                href={`${urls.about}${PAGE_PATHS.privacy}`}
                 className="hover:text-white transition-colors"
               >
                 {t.footer.privacy}
               </a>
               <span>•</span>
               <a
-                href={`${legalBaseUrl}/terms-of-service.html`}
+                href={`${urls.about}${PAGE_PATHS.terms}`}
                 className="hover:text-white transition-colors"
               >
                 {t.footer.terms}
