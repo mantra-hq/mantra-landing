@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Download } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import { LanguageToggle } from './LanguageToggle';
@@ -12,7 +13,6 @@ export function Header() {
   const docsUrl = lang === 'zh' ? '/docs/index.html' : '/docs/en/index.html';
   const blogUrl = lang === 'zh' ? '/blog/zh/' : '/blog/';
   const faqUrl = lang === 'zh' ? '/docs/about/faq.html' : '/docs/en/about/faq.html';
-  const securityUrl = lang === 'zh' ? '/docs/about/security-policy.html' : '/docs/en/about/security-policy.html';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -26,11 +26,11 @@ export function Header() {
   };
 
   const navItems = [
-    { label: t.header.features, href: '#features', isAnchor: true },
+    { label: t.header.features, href: '/#features', isAnchor: true },
+    { label: t.header.pricing, href: '/pricing', isRoute: true },
     { label: t.header.docs, href: docsUrl, isAnchor: false },
     { label: t.header.blog, href: blogUrl, isAnchor: false },
     { label: t.header.faq, href: faqUrl, isAnchor: false },
-    { label: t.header.security, href: securityUrl, isAnchor: false },
   ];
 
   return (
@@ -55,20 +55,30 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm text-gray-400 hover:text-white transition-colors"
-              >
-                {item.label}
-              </a>
+              'isRoute' in item && item.isRoute ? (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
             <a
-              href="#signup"
+              href="/#signup"
               className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
             >
               <Download className="w-4 h-4" />
@@ -95,18 +105,29 @@ export function Header() {
           <div className="md:hidden py-4 border-t border-white/5">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-gray-400 hover:text-white transition-colors py-2"
-                >
-                  {item.label}
-                </a>
+                'isRoute' in item && item.isRoute ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors py-2"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors py-2"
+                  >
+                    {item.label}
+                  </a>
+                )
               ))}
               <div className="pt-4 border-t border-white/5 flex items-center justify-between">
                 <a
-                  href="#signup"
+                  href="/#signup"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
                 >
