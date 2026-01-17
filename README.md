@@ -157,6 +157,19 @@ SUPABASE_SERVICE_ROLE_KEY=xxx
 
 文档站部署基础路径为 `/docs/`，输出到 `docs-dist/` 目录，避免与 React 构建冲突。
 
+### Supabase 心跳任务
+
+Supabase 免费版会在 7 天不活跃后暂停实例。项目配置了 GitHub Actions 定时任务来保持实例活跃。
+
+**配置 GitHub Secrets**（Settings → Secrets and variables → Actions）：
+
+| Secret 名称 | 值 |
+|------------|---|
+| `SUPABASE_URL` | `https://xxx.supabase.co` |
+| `SUPABASE_SERVICE_ROLE_KEY` | 你的 service role key |
+
+心跳任务每天 UTC 00:00（北京时间 08:00）自动执行，也可在 Actions 页面手动触发。
+
 ## License
 
 Private

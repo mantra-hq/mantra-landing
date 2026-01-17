@@ -1,0 +1,47 @@
+# Supabase 实例心跳任务
+# 防止 Supabase 免费版因 7 天不活跃而暂停实例
+# 每天执行一次简单查询保持数据库活跃
+
+name: Supabase Keepalive
+
+on:
+  schedule:
+    # 每天 UTC 时间 00:00 执行（北京时间 08:00）
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "🔄 Sending heartbeat to Supabase..."
+
+          # 执行简单的 REST API 查询来保持数据库活跃
+          # 查询 subscribers 表的记录数（limit 1 以减少负载）
+          response=$(curl -s -w "\n%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/subscribers?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}")
+
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+
+          echo "HTTP Status: $http_code"
+
+          if [ "$http_code" -ge 200 ] && [ "$http_code" -lt 300 ]; then
+            echo "✅ Heartbeat successful! Supabase is alive."
+          else
+            echo "❌ Heartbeat failed!"
+            echo "Response: $body"
+            exit 1
+          fi
+
+      - name: Report Status
+        if: always()
+        run: |
+          echo "⏰ Keepalive job completed at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"

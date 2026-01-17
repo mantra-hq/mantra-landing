@@ -36,3 +36,4 @@ public/docs/
 public/blog/
 
 .wrangler/
+.playwright-mcp/
