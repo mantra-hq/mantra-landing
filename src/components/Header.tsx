@@ -79,13 +79,13 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="/#signup"
+            <Link
+              to="/download"
               className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
             >
               <Download className="w-4 h-4" />
               {t.header.download}
-            </a>
+            </Link>
             <LanguageToggle inline />
           </div>
 
@@ -128,14 +128,14 @@ export function Header() {
                 )
               ))}
               <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                <a
-                  href="/#signup"
+                <Link
+                  to="/download"
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   {t.header.download}
-                </a>
+                </Link>
                 <LanguageToggle inline />
               </div>
             </nav>

@@ -8,6 +8,7 @@ import { SupportedTools } from './components/SupportedTools';
 import { MakerStory } from './components/MakerStory';
 import { Pricing } from './components/Pricing';
 import { PricingPage } from './pages/PricingPage';
+import { DownloadPage } from './pages/DownloadPage';
 import { EmailSignup } from './components/EmailSignup';
 import { ReferralStatus } from './components/ReferralStatus';
 import { Footer } from './components/Footer';
@@ -58,6 +59,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/download" element={<DownloadPage />} />
         </Routes>
         <Footer />
       </div>
