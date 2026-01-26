@@ -7,13 +7,6 @@ export function Pricing() {
 
   const freeFeatures = t.pricing.free.features as unknown as string[];
 
-  const handleDownload = () => {
-    const signupSection = document.getElementById('signup');
-    if (signupSection) {
-      signupSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section id="pricing" className="py-32 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
@@ -56,13 +49,13 @@ export function Pricing() {
                 <div className="text-5xl font-bold text-secondary">$0</div>
                 <div className="text-gray-500">forever</div>
               </div>
-              <button
-                onClick={handleDownload}
+              <Link
+                to="/download"
                 className="px-8 py-3 rounded-xl bg-secondary text-dark-600 font-semibold hover:bg-secondary/90 transition-colors flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 {t.pricing.free.cta}
-              </button>
+              </Link>
             </div>
           </div>
 
