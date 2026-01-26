@@ -1,13 +1,10 @@
-import { Play, Clock, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Download, Clock, Sparkles } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import { RollingToolName } from './RollingToolName';
 import mantraIcon from '../assets/icon-mantra.png';
 
-interface HeroProps {
-  onCtaClick: () => void;
-}
-
-export function Hero({ onCtaClick }: HeroProps) {
+export function Hero() {
   const { t } = useI18n();
 
   return (
@@ -49,15 +46,13 @@ export function Hero({ onCtaClick }: HeroProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={onCtaClick}
-              className="group relative px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 glow-primary"
+            <Link
+              to="/download"
+              className="group relative px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 glow-primary flex items-center gap-2"
             >
-              <span className="flex items-center gap-2">
-                <Play className="w-5 h-5" />
-                {t.hero.downloadAlpha}
-              </span>
-            </button>
+              <Download className="w-5 h-5" />
+              {t.hero.downloadAlpha}
+            </Link>
             <a
               href="#features"
               className="px-8 py-4 glass hover:bg-white/10 text-white font-medium rounded-xl transition-all duration-300 flex items-center gap-2"

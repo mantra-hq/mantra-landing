@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { I18nProvider } from './lib/i18n';
 import { Header } from './components/Header';
@@ -9,8 +9,6 @@ import { MakerStory } from './components/MakerStory';
 import { Pricing } from './components/Pricing';
 import { PricingPage } from './pages/PricingPage';
 import { DownloadPage } from './pages/DownloadPage';
-import { EmailSignup } from './components/EmailSignup';
-import { ReferralStatus } from './components/ReferralStatus';
 import { Footer } from './components/Footer';
 import { StarfieldBackground } from './components/StarfieldBackground';
 
@@ -26,25 +24,13 @@ function ScrollToTop() {
 }
 
 function HomePage() {
-  const signupRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSignup = () => {
-    signupRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <>
-      <Hero onCtaClick={scrollToSignup} />
+      <Hero />
       <SupportedTools />
       <Features />
       <Pricing />
       <MakerStory />
-      <div ref={signupRef} id="signup">
-        <EmailSignup />
-      </div>
-      <div className="border-t border-white/5">
-        <ReferralStatus />
-      </div>
     </>
   );
 }
