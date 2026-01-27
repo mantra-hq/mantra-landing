@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Download, Clock, Sparkles } from 'lucide-react';
+import { Download, Sparkles } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import { RollingToolName } from './RollingToolName';
 import mantraIcon from '../assets/icon-mantra.png';
@@ -24,11 +24,6 @@ export function Hero() {
               />
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl -z-10" />
             </div>
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-            <Clock className="w-4 h-4 text-primary" />
-            <span className="text-sm text-gray-300">{t.hero.badge}</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
