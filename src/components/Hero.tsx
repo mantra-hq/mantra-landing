@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Download, Sparkles } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
-import { RollingToolName } from './RollingToolName';
 import mantraIcon from '../assets/icon-mantra.png';
 
 export function Hero() {
@@ -26,18 +25,27 @@ export function Hero() {
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-            <span className="text-white">{t.hero.title1}</span>{' '}
-            <span className="text-gradient">{t.hero.title2}</span>
-            <br />
-            <span className="text-white">{t.hero.title3}</span>
+          {/* Badge */}
+          <div className="flex justify-center mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">{t.hero.badge}</span>
+            </span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white">
+            {t.hero.title}
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-400 mb-4 max-w-2xl mx-auto leading-relaxed">
-            {t.hero.subtitle}
+          {/* Subtitle: three keywords with gradient */}
+          <p className="text-3xl md:text-4xl font-bold mb-6">
+            <span className="text-gradient">{t.hero.subtitle}</span>
           </p>
-          <p className="text-lg text-gray-500 mb-12 max-w-xl mx-auto">
-            {t.hero.description} <RollingToolName /> {t.hero.descriptionEnd}
+
+          {/* Description */}
+          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+            {t.hero.description}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

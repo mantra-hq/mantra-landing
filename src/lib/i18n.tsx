@@ -5,13 +5,10 @@ export type Language = 'en' | 'zh';
 const translations = {
   en: {
     hero: {
-      badge: 'Alpha Preview Available',
-      title1: 'AI',
-      title2: 'Coding Sessions',
-      title3: 'Time Machine',
-      subtitle: 'Replay context. Filter noise. Master the craft.',
-      description: 'Manage your',
-      descriptionEnd: 'logs and extract your personal coding mantras.',
+      badge: 'MCP Hub Now Available',
+      title: 'Mantra',
+      subtitle: 'Connect · Enhance · Simplify',
+      description: 'Bring Claude Code, Cursor, and Gemini CLI together as one — replay sessions, manage MCP services, extract coding wisdom. Everything local. Everything yours.',
       downloadAlpha: 'Free Download',
       exploreFeatures: 'Explore Features',
       docs: 'Docs',
@@ -20,12 +17,14 @@ const translations = {
       tokens: 'Tokens',
     },
     tools: {
-      title: 'Works With Your',
-      titleHighlight: 'Favorite Tools',
-      subtitle: 'Import logs from the leading AI coding assistants',
+      title: 'One app for all your',
+      titleHighlight: 'AI coding tools',
+      subtitle: 'Session replay + MCP service management, unified',
       supported: 'Supported',
       comingSoon: 'Coming Soon',
       soon: 'Soon',
+      capabilityReplay: 'Session Replay',
+      capabilityMcp: 'MCP Service Management',
     },
     features: {
       title: 'Built for',
@@ -95,13 +94,110 @@ const translations = {
       password: 'Password',
       token: 'Token',
     },
+    pillars: {
+      sectionLabel: 'Core Features',
+      connect: {
+        label: '01 · Connect',
+        title: 'Connect',
+        description: 'Bring scattered AI tools together as one',
+        hero: {
+          tagline: 'MCP Unified Gateway',
+          title: 'Configure once, share everywhere',
+          description: 'Manage MCP services in Mantra — Claude Code, Cursor, and Gemini CLI automatically share the same tools and context. No more duplicate configs.',
+        },
+        compact: [
+          {
+            title: 'Five AI coding tools, one-click import',
+            description: 'Auto-discover and import session logs from Claude Code, Cursor, Gemini CLI, and Codex. One click, zero manual work.',
+          },
+          {
+            title: 'Same project, different tools, auto-merged',
+            description: 'Mantra detects working directories and Git repos to automatically group sessions from different tools into one project view.',
+          },
+        ],
+      },
+      enhance: {
+        label: '02 · Enhance',
+        title: 'Enhance',
+        description: 'Make every AI collaboration more valuable',
+        hero: {
+          tagline: 'Git Time Travel',
+          title: 'Drag the timeline, code jumps instantly',
+          description: 'Conversations aligned with Git history. Click any message, code view switches to that exact moment. Revisit any decision point.',
+        },
+        compact: [
+          {
+            title: 'Built-in debugger, tools at your fingertips',
+            description: 'Browse available tools, test calls in real time, view RPC logs. Debug and optimize your MCP services without leaving Mantra.',
+          },
+          {
+            title: 'Fine-grained permissions, project-level control',
+            description: 'Three-tier policy: global, service, project. You decide which tools are available where. More granular than any single AI tool\'s native config.',
+          },
+        ],
+        skillsHub: {
+          title: 'Skills Hub',
+          badge: 'Coming Soon',
+          description: 'Manage and reuse your coding skill library. Let AI tools automatically leverage your best practices.',
+        },
+      },
+      simplify: {
+        label: '03 · Simplify',
+        title: 'Simplify',
+        description: 'Zero barrier, ready out of the box',
+        hero: {
+          tagline: 'Smart Takeover',
+          title: 'Import your existing config in one click',
+          description: 'Already configured MCP services in Claude Code or Cursor? Mantra imports them instantly — auto-detects conflicts, previews in Shadow Mode before applying. Zero migration cost.',
+        },
+        compact: [
+          {
+            title: 'Cmd+K, instant cross-project search',
+            description: 'Search across all projects and sessions. CJK-aware tokenization, highlighted results, click to jump directly.',
+          },
+          {
+            title: 'Scan before sharing, nothing slips through',
+            description: 'Local Rust engine auto-detects API keys, passwords, and tokens. Preview diffs, redact with one click, share with confidence.',
+          },
+        ],
+      },
+      cta: {
+        label: 'All features above are free',
+        button: 'Free Download',
+      },
+    },
+    mcpHub: {
+      label: 'MCP Hub',
+      title: 'Your AI Tool',
+      titleHighlight: 'Control Center',
+      description: 'MCP (Model Context Protocol) connects AI tools to external services. Mantra makes it simple: one config, one manager, one debugger.',
+      points: [
+        {
+          title: 'Configure once, use everywhere',
+          description: 'Add MCP services in Mantra, all AI tools share them automatically. No more duplicate configs across tools.',
+        },
+        {
+          title: 'Smart Takeover',
+          description: 'Import existing configs from Claude Code / Cursor in one click. Diff compare → Shadow preview → Confirm. Atomic backups, rollback anytime.',
+        },
+        {
+          title: 'Built-in Inspector',
+          description: 'Tool Explorer to browse all available tools. Tool Tester for one-click verification. RPC Log Viewer to trace every request in real time.',
+        },
+        {
+          title: 'Security & Permissions',
+          description: 'Encrypted environment variables. Secure OAuth credentials. Project-level tool policies — precise control over which tools are available where.',
+        },
+      ],
+      tagline: 'Runs locally. Open protocol. Your MCP services, your rules.',
+    },
     maker: {
       origin: 'The Origin',
       originQuote: '"I realized I had GBs of AI logs on disk, but couldn\'t learn anything from them."',
       insight: 'The Insight',
-      insightQuote: '"Code is the output. But the prompt chain is the wisdom."',
+      insightQuote: '"Code is the output. But the prompt chain is the wisdom. And every developer is duplicating the same tool configs — that shouldn\'t be."',
       invitation: 'The Invitation',
-      invitationText: 'We built this to help developers debug their thinking process. It\'s local-first, privacy-focused, and made for power users. Welcome to try it.',
+      invitationText: 'We built this to connect everything between developers and AI tools — sessions, services, workflows. Local-first, privacy-focused, built for power users. Welcome to try it.',
       team: 'The Mantra Team',
       teamDesc: 'Building tools for AI-native developers',
     },
@@ -148,6 +244,7 @@ const translations = {
     },
     header: {
       features: 'Features',
+      mcpHub: 'MCP Hub',
       pricing: 'Pricing',
       docs: 'Docs',
       blog: 'Blog',
@@ -176,17 +273,17 @@ const translations = {
       hero: {
         title: 'Free without limits.',
         subtitle: 'No sign-up required. No strings attached.',
-        description: 'Mantra is a free AI session manager. Optional add-on services make it easy to sync and share your sessions.',
+        description: 'Mantra is a free AI coding tool manager. Optional add-on services for sync and sharing.',
       },
       free: {
         title: 'Mantra is free',
         description: 'Use it for as long as you like, with unlimited sessions.',
         features: [
           'Unlimited sessions & projects',
-          'Full-text search across all sessions',
-          'Time travel with Git integration',
-          'Local sanitizer engine',
-          'BYOK (Bring Your Own Key)',
+          'MCP Hub (unified config + Inspector)',
+          'Git-integrated time travel',
+          'Cross-project full-text search',
+          'Local redaction engine',
           'macOS, Windows, Linux',
         ],
         cta: 'Download for Free',
@@ -288,13 +385,10 @@ const translations = {
   },
   zh: {
     hero: {
-      badge: 'Alpha 预览版已发布',
-      title1: 'AI',
-      title2: '编程会话',
-      title3: '时光机',
-      subtitle: '回放上下文，滤除噪点，掌握心法。',
-      description: '管理你的',
-      descriptionEnd: '日志，提炼属于你的编程心法。',
+      badge: 'MCP Hub 全新上线',
+      title: 'Mantra 心法',
+      subtitle: '连接 · 增强 · 易用',
+      description: '将 Claude Code、Cursor、Gemini CLI 连接为一个整体——回放会话，管理 MCP 服务，提炼编程智慧。一切发生在本地，一切由你掌控。',
       downloadAlpha: '免费下载',
       exploreFeatures: '探索功能',
       docs: '文档',
@@ -303,12 +397,14 @@ const translations = {
       tokens: 'Tokens',
     },
     tools: {
-      title: '支持你',
-      titleHighlight: '喜爱的工具',
-      subtitle: '从主流 AI 编程助手导入日志',
+      title: '一个应用，连接你的所有',
+      titleHighlight: 'AI 编程工具',
+      subtitle: '会话回放 + MCP 服务管理，统一体验',
       supported: '已支持',
       comingSoon: '即将支持',
       soon: '即将',
+      capabilityReplay: '会话回放',
+      capabilityMcp: 'MCP 服务管理',
     },
     features: {
       title: '为',
@@ -378,13 +474,110 @@ const translations = {
       password: '密码',
       token: '令牌',
     },
+    pillars: {
+      sectionLabel: '核心功能',
+      connect: {
+        label: '01 · 连接',
+        title: '连接',
+        description: '让散落的 AI 工具成为一个整体',
+        hero: {
+          tagline: 'MCP 统一网关',
+          title: '配置一次，所有工具共享',
+          description: '在 Mantra 中管理你的 MCP 服务，Claude Code、Cursor、Gemini CLI 自动获得相同的工具和上下文。不再为每个工具重复配置。',
+        },
+        compact: [
+          {
+            title: '五大 AI 编程工具，一键导入',
+            description: '自动发现并导入 Claude Code、Cursor、Gemini CLI、Codex 的会话日志。一键导入，零手动操作。',
+          },
+          {
+            title: '同一项目，不同工具，自动合并',
+            description: 'Mantra 根据工作目录和 Git 仓库自动识别项目，将不同工具产生的会话归入同一个项目视图。',
+          },
+        ],
+      },
+      enhance: {
+        label: '02 · 增强',
+        title: '增强',
+        description: '让每一次 AI 协作更有价值',
+        hero: {
+          tagline: 'Git 时间旅行',
+          title: '拖拽时间轴，代码瞬间穿越',
+          description: '对话与 Git 历史精确对齐。点击任意消息，右侧代码自动切换到该时刻的文件状态。回到任何一个决策瞬间。',
+        },
+        compact: [
+          {
+            title: '内置调试器，工具尽在掌握',
+            description: '浏览可用工具、实时测试调用、查看 RPC 日志。不用离开 Mantra，就能排查和优化你的 MCP 服务。',
+          },
+          {
+            title: '精细权限，项目级控制',
+            description: '全局、服务、项目三层权限管理。哪些工具在哪些项目可用，由你决定。比任何单一 AI 工具的原生配置更精细。',
+          },
+        ],
+        skillsHub: {
+          title: 'Skills Hub',
+          badge: '即将上线',
+          description: '管理和复用你的编程技能库，让 AI 工具自动获得你积累的最佳实践。',
+        },
+      },
+      simplify: {
+        label: '03 · 易用',
+        title: '易用',
+        description: '零门槛，开箱即用',
+        hero: {
+          tagline: 'Smart Takeover',
+          title: '一键接管现有配置',
+          description: '已经在 Claude Code 或 Cursor 中配置了 MCP 服务？Mantra 一键导入，自动检测冲突，Shadow Mode 预览后再应用。零迁移成本。',
+        },
+        compact: [
+          {
+            title: 'Cmd+K，跨项目秒级定位',
+            description: '跨所有项目、所有会话的全文搜索。中英文分词，结果高亮，点击直接跳转。',
+          },
+          {
+            title: '分享前扫描，敏感信息无处遁形',
+            description: '本地 Rust 引擎自动识别 API 密钥、密码、Token。Diff 预览确认后一键脱敏，安心分享。',
+          },
+        ],
+      },
+      cta: {
+        label: '以上功能全部免费',
+        button: '免费下载',
+      },
+    },
+    mcpHub: {
+      label: 'MCP Hub',
+      title: '你的 AI 工具',
+      titleHighlight: '中控台',
+      description: 'MCP（模型上下文协议）让 AI 工具连接外部服务。Mantra 把它变得简单：统一配置，统一管理，统一调试。',
+      points: [
+        {
+          title: '配置一次，处处可用',
+          description: '在 Mantra 中添加 MCP 服务，所有 AI 工具自动共享。告别在每个工具里重复配置的痛苦。',
+        },
+        {
+          title: 'Smart Takeover 智能接管',
+          description: '一键导入 Claude Code / Cursor 现有配置。Diff 对比 → Shadow 预览 → 确认应用。原子性备份，随时回滚。',
+        },
+        {
+          title: '内置 Inspector 调试器',
+          description: '工具浏览器查看所有可用工具。工具测试器一键验证调用。RPC 日志实时追踪每一次请求。',
+        },
+        {
+          title: '安全与权限',
+          description: '环境变量加密存储。OAuth 凭证安全管理。项目级工具权限——哪些项目能用哪些工具，精确控制。',
+        },
+      ],
+      tagline: '本地运行。开源协议。你的 MCP 服务，你做主。',
+    },
     maker: {
       origin: '起源',
       originQuote: '"我意识到磁盘里存了几个 GB 的 AI 日志，但没法从中学习任何东西。"',
       insight: '顿悟',
-      insightQuote: '"代码是结果，但 Prompt 链才是智慧。"',
+      insightQuote: '"代码是结果，Prompt 链才是智慧。而每个开发者都在重复配置相同的工具——这不应该。"',
       invitation: '邀请',
-      invitationText: '我们做这个是为了帮开发者 Debug 自己的思考过程。它是本地优先的，注重隐私，专为深度用户打造。欢迎尝试。',
+      invitationText: '我们做这个是为了把开发者和 AI 工具之间的一切连接起来——会话、服务、工作流。本地优先，注重隐私，为深度用户打造。欢迎尝试。',
       team: 'Mantra 团队',
       teamDesc: '为 AI 原生开发者打造工具',
     },
@@ -431,6 +624,7 @@ const translations = {
     },
     header: {
       features: '功能',
+      mcpHub: 'MCP Hub',
       pricing: '定价',
       docs: '文档',
       blog: '博客',
@@ -459,17 +653,17 @@ const translations = {
       hero: {
         title: '免费，无限制。',
         subtitle: '无需注册，没有任何附加条件。',
-        description: 'Mantra 是一款免费的 AI 会话管理器。可选的增值服务让你轻松同步和分享会话。',
+        description: 'Mantra 是一款免费的 AI 编程工具管理平台。可选增值服务让你轻松同步和分享。',
       },
       free: {
         title: 'Mantra 完全免费',
         description: '随意使用，不限会话数量。',
         features: [
           '无限会话和项目',
-          '跨会话全文搜索',
+          'MCP Hub（统一配置 + Inspector）',
           'Git 集成时间旅行',
+          '跨项目全文搜索',
           '本地脱敏引擎',
-          'BYOK（自带 API Key）',
           '支持 macOS、Windows、Linux',
         ],
         cta: '免费下载',

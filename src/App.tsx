@@ -7,6 +7,7 @@ import { Features } from './components/Features';
 import { SupportedTools } from './components/SupportedTools';
 import { MakerStory } from './components/MakerStory';
 import { Pricing } from './components/Pricing';
+import { McpHubShowcase } from './components/McpHubShowcase';
 import { PricingPage } from './pages/PricingPage';
 import { DownloadPage } from './pages/DownloadPage';
 import { Footer } from './components/Footer';
@@ -29,6 +30,7 @@ function HomePage() {
       <Hero />
       <SupportedTools />
       <Features />
+      <McpHubShowcase />
       <Pricing />
       <MakerStory />
     </>

@@ -1,406 +1,246 @@
-import { Clock, Search, ShieldCheck, Shield, GitCommit, FileCode, MousePointer, Lock, Cpu, Monitor, Eye, ScanLine, FileWarning, BarChart3, Layers, Wrench, FolderOpen, MessageSquare } from 'lucide-react';
+import { Server, Clock, Import, GitBranch, Terminal, ShieldCheck, Search, ScanLine, Package, Download } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '../lib/i18n';
+import { McpGatewayVisual } from './visuals/McpGatewayVisual';
+import { TimeTravelVisual } from './visuals/TimeTravelVisual';
+import { SmartTakeoverVisual } from './visuals/SmartTakeoverVisual';
+
+type LucideIcon = React.ComponentType<{ className?: string }>;
+
+type PillarColor = 'primary' | 'secondary' | 'primary-300';
+
+const colorStyles: Record<PillarColor, { text: string; bg: string; border: string; borderLeft: string }> = {
+  primary: {
+    text: 'text-primary',
+    bg: 'bg-primary/10',
+    border: 'border-primary/20',
+    borderLeft: 'border-primary/40',
+  },
+  secondary: {
+    text: 'text-secondary',
+    bg: 'bg-secondary/10',
+    border: 'border-secondary/20',
+    borderLeft: 'border-secondary/40',
+  },
+  'primary-300': {
+    text: 'text-primary-300',
+    bg: 'bg-primary-300/10',
+    border: 'border-primary-300/20',
+    borderLeft: 'border-primary-300/40',
+  },
+};
 
 export function Features() {
   const { t } = useI18n();
 
-  const features = [
-    {
-      id: 'timeTravel',
-      title: t.features.timeTravel.title,
-      tagline: t.features.timeTravel.tagline,
-      description: t.features.timeTravel.description,
-      icon: Clock,
-      color: 'primary',
-      details: [
-        { icon: MousePointer, text: t.features.timeTravel.detail1 },
-        { icon: GitCommit, text: t.features.timeTravel.detail2 },
-        { icon: FileCode, text: t.features.timeTravel.detail3 },
-      ],
-    },
-    {
-      id: 'search',
-      title: t.features.search.title,
-      tagline: t.features.search.tagline,
-      description: t.features.search.description,
-      icon: Search,
-      color: 'secondary',
-      details: [
-        { icon: Search, text: t.features.search.detail1 },
-        { icon: Eye, text: t.features.search.detail2 },
-        { icon: MousePointer, text: t.features.search.detail3 },
-      ],
-    },
-    {
-      id: 'security',
-      title: t.features.security.title,
-      tagline: t.features.security.tagline,
-      description: t.features.security.description,
-      icon: ShieldCheck,
-      color: 'primary',
-      details: [
-        { icon: ScanLine, text: t.features.security.detail1 },
-        { icon: FileWarning, text: t.features.security.detail2 },
-        { icon: ShieldCheck, text: t.features.security.detail3 },
-      ],
-    },
-    {
-      id: 'privacy',
-      title: t.features.privacy.title,
-      tagline: t.features.privacy.tagline,
-      description: t.features.privacy.description,
-      icon: Shield,
-      color: 'secondary',
-      details: [
-        { icon: Lock, text: t.features.privacy.detail1 },
-        { icon: Cpu, text: t.features.privacy.detail2 },
-        { icon: Monitor, text: t.features.privacy.detail3 },
-      ],
-    },
-    {
-      id: 'insights',
-      title: t.features.insights.title,
-      tagline: t.features.insights.tagline,
-      description: t.features.insights.description,
-      icon: BarChart3,
-      color: 'secondary',
-      details: [
-        { icon: Layers, text: t.features.insights.detail1 },
-        { icon: FolderOpen, text: t.features.insights.detail2 },
-        { icon: Wrench, text: t.features.insights.detail3 },
-      ],
-    },
-  ];
-
   return (
-    <section id="features" className="py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
-
-      <div className="relative max-w-6xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            {t.features.title} <span className="text-gradient">{t.features.titleHighlight}</span>
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            {t.features.subtitle}
-          </p>
-        </div>
-
-        <div className="space-y-24">
-          {features.map((feature, index) => (
-            <FeatureCard key={feature.id} feature={feature} index={index} />
-          ))}
-        </div>
+    <>
+      {/* Features Anchor Title */}
+      <div id="features" className="pt-16 mb-8">
+        <div className="w-12 h-0.5 bg-gradient-to-r from-primary to-secondary mx-auto mb-6" />
+        <p className="text-sm text-gray-600 uppercase tracking-widest text-center">
+          {t.pillars.sectionLabel}
+        </p>
       </div>
-    </section>
+
+      {/* Pillar 1: Connect */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/3 to-transparent" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <PillarHeader
+            label={t.pillars.connect.label}
+            title={t.pillars.connect.title}
+            description={t.pillars.connect.description}
+            color="primary"
+          />
+          <HeroFeature
+            tagIcon={Server}
+            tagline={t.pillars.connect.hero.tagline}
+            title={t.pillars.connect.hero.title}
+            description={t.pillars.connect.hero.description}
+            color="primary"
+            visual={<McpGatewayVisual />}
+            reverse={false}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <CompactCard
+              icon={Import}
+              title={t.pillars.connect.compact[0].title}
+              description={t.pillars.connect.compact[0].description}
+              color="primary"
+            />
+            <CompactCard
+              icon={GitBranch}
+              title={t.pillars.connect.compact[1].title}
+              description={t.pillars.connect.compact[1].description}
+              color="primary"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+
+      {/* Pillar 2: Enhance */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/3 to-transparent" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <PillarHeader
+            label={t.pillars.enhance.label}
+            title={t.pillars.enhance.title}
+            description={t.pillars.enhance.description}
+            color="secondary"
+          />
+          <HeroFeature
+            tagIcon={Clock}
+            tagline={t.pillars.enhance.hero.tagline}
+            title={t.pillars.enhance.hero.title}
+            description={t.pillars.enhance.hero.description}
+            color="secondary"
+            visual={<TimeTravelVisual />}
+            reverse={true}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <CompactCard
+              icon={Terminal}
+              title={t.pillars.enhance.compact[0].title}
+              description={t.pillars.enhance.compact[0].description}
+              color="secondary"
+            />
+            <CompactCard
+              icon={ShieldCheck}
+              title={t.pillars.enhance.compact[1].title}
+              description={t.pillars.enhance.compact[1].description}
+              color="secondary"
+            />
+          </div>
+
+          {/* Skills Hub Coming Soon Banner */}
+          <div className="mt-6 glass-dark rounded-xl p-4 border border-dashed border-white/10 flex flex-col sm:flex-row items-center gap-4">
+            <div className="p-2 rounded-lg bg-secondary/10 flex-shrink-0">
+              <Package className="w-5 h-5 text-secondary" />
+            </div>
+            <div className="flex items-center gap-3 flex-1">
+              <span className="text-sm font-medium text-white">{t.pillars.enhance.skillsHub.title}</span>
+              <span className="inline-flex px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs">
+                {t.pillars.enhance.skillsHub.badge}
+              </span>
+            </div>
+            <p className="text-sm text-gray-500">{t.pillars.enhance.skillsHub.description}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Auxiliary CTA */}
+      <PillarCta />
+
+      {/* Pillar 3: Simplify */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-300/3 to-transparent" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <PillarHeader
+            label={t.pillars.simplify.label}
+            title={t.pillars.simplify.title}
+            description={t.pillars.simplify.description}
+            color="primary-300"
+          />
+          <HeroFeature
+            tagIcon={Import}
+            tagline={t.pillars.simplify.hero.tagline}
+            title={t.pillars.simplify.hero.title}
+            description={t.pillars.simplify.hero.description}
+            color="primary-300"
+            visual={<SmartTakeoverVisual />}
+            reverse={false}
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <CompactCard
+              icon={Search}
+              title={t.pillars.simplify.compact[0].title}
+              description={t.pillars.simplify.compact[0].description}
+              color="primary-300"
+            />
+            <CompactCard
+              icon={ScanLine}
+              title={t.pillars.simplify.compact[1].title}
+              description={t.pillars.simplify.compact[1].description}
+              color="primary-300"
+            />
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
-interface Feature {
-  id: string;
-  title: string;
-  tagline: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-  color: string;
-  details: { icon: React.ComponentType<{ className?: string }>; text: string }[];
-}
+/* ── Sub-components ─────────────────────────────────────── */
 
-interface FeatureCardProps {
-  feature: Feature;
-  index: number;
-}
-
-function FeatureCard({ feature, index }: FeatureCardProps) {
-  const Icon = feature.icon;
-  const isEven = index % 2 === 0;
-  const colorClass = feature.color === 'primary' ? 'text-primary' : 'text-secondary';
-  const bgColorClass = feature.color === 'primary' ? 'bg-primary/10' : 'bg-secondary/10';
-  const glowClass = feature.color === 'primary' ? 'glow-primary' : 'glow-secondary';
-
+function PillarHeader({ label, title, description, color }: {
+  label: string; title: string; description: string; color: PillarColor;
+}) {
+  const s = colorStyles[color];
   return (
-    <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12`}>
-      <div className="flex-1 space-y-6">
-        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${bgColorClass}`}>
-          <Icon className={`w-4 h-4 ${colorClass}`} />
-          <span className={`text-sm font-medium ${colorClass}`}>{feature.tagline}</span>
-        </div>
-
-        <h3 className="text-3xl md:text-4xl font-bold text-white">
-          {feature.title}
-        </h3>
-
-        <p className="text-lg text-gray-400 leading-relaxed">
-          {feature.description}
-        </p>
-
-        <div className="space-y-3 pt-4">
-          {feature.details.map((detail, i) => {
-            const DetailIcon = detail.icon;
-            return (
-              <div key={i} className="flex items-center gap-3 text-gray-300">
-                <div className={`p-2 rounded-lg ${bgColorClass}`}>
-                  <DetailIcon className={`w-4 h-4 ${colorClass}`} />
-                </div>
-                <span>{detail.text}</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="flex-1 w-full">
-        <FeatureVisual featureId={feature.id} glowClass={glowClass} />
-      </div>
+    <div className="text-center mb-16">
+      <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${s.bg} border ${s.border} mb-4`}>
+        <span className={`text-sm font-medium ${s.text}`}>{label}</span>
+      </span>
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">{title}</h2>
+      <p className="text-lg text-gray-400 max-w-2xl mx-auto">{description}</p>
     </div>
   );
 }
 
-interface FeatureVisualProps {
-  featureId: string;
-  glowClass: string;
+function HeroFeature({ tagIcon: TagIcon, tagline, title, description, color, visual, reverse }: {
+  tagIcon: LucideIcon; tagline: string; title: string; description: string;
+  color: PillarColor; visual: React.ReactNode; reverse: boolean;
+}) {
+  const s = colorStyles[color];
+  return (
+    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}>
+      <div className="flex-1 space-y-4">
+        <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${s.bg}`}>
+          <TagIcon className={`w-4 h-4 ${s.text}`} />
+          <span className={`text-sm font-medium ${s.text}`}>{tagline}</span>
+        </span>
+        <h3 className="text-3xl md:text-4xl font-bold text-white">{title}</h3>
+        <p className="text-lg text-gray-400 leading-relaxed">{description}</p>
+      </div>
+      <div className="flex-1 w-full">{visual}</div>
+    </div>
+  );
 }
 
-function FeatureVisual({ featureId, glowClass }: FeatureVisualProps) {
-  const { t } = useI18n();
-
-  if (featureId === 'timeTravel') {
-    return (
-      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-        <div className="space-y-4">
-          {/* Timeline with markers */}
-          <div className="relative py-4">
-            <div className="h-2 bg-dark-200 rounded-full overflow-hidden">
-              <div className="h-full w-3/5 bg-gradient-to-r from-primary to-secondary rounded-full" />
-            </div>
-            {/* Draggable indicator */}
-            <div
-              className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-primary cursor-grab"
-              style={{ left: '60%', transform: 'translate(-50%, -50%)' }}
-            />
-            {/* User message markers (blue dots) */}
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '10%' }} />
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '35%' }} />
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full" style={{ left: '75%' }} />
-            {/* Git commit markers (green squares) */}
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '25%', transform: 'translate(-50%, -50%)' }} />
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '55%', transform: 'translate(-50%, -50%)' }} />
-            <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rounded-sm" style={{ left: '90%', transform: 'translate(-50%, -50%)' }} />
-          </div>
-          
-          {/* Legend */}
-          <div className="flex items-center justify-center gap-6 text-xs text-gray-500">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 bg-primary rounded-full" />
-              <span>User Message</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 bg-secondary rounded-sm" />
-              <span>Git Commit</span>
-            </div>
-          </div>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          
-          {/* Code preview panel */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 rounded-lg bg-dark-300/50">
-              <div className="text-xs text-gray-500 mb-2 font-mono">src/App.tsx</div>
-              <div className="text-xs text-gray-400 font-mono space-y-1">
-                <div><span className="text-secondary">+</span> const [dark, setDark]</div>
-                <div><span className="text-secondary">+</span> useState(false)</div>
-              </div>
-            </div>
-            <div className="p-3 rounded-lg bg-dark-300/50">
-              <div className="flex items-center gap-2 mb-2">
-                <GitCommit className="w-3 h-3 text-secondary" />
-                <span className="text-xs text-secondary font-mono">a3f2c1d</span>
-              </div>
-              <div className="text-xs text-gray-400">Add dark mode toggle</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (featureId === 'search') {
-    return (
-      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-        <div className="space-y-4">
-          {/* Search bar */}
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-dark-200/50 border border-secondary/30">
-            <Search className="w-4 h-4 text-secondary" />
-            <span className="text-sm text-gray-300">authentication error</span>
-            <kbd className="ml-auto px-2 py-0.5 rounded bg-dark-300 text-xs text-gray-500">⌘K</kbd>
-          </div>
-          
-          {/* Search results */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>3 {t.features.searchResults}</span>
-            </div>
-            {[
-              { project: 'auth-service', message: '...fix <mark>authentication error</mark> in login...', time: '2h ago' },
-              { project: 'api-gateway', message: '...handle <mark>authentication error</mark> response...', time: '1d ago' },
-              { project: 'user-service', message: '...debug <mark>authentication error</mark> logs...', time: '3d ago' },
-            ].map((result, i) => (
-              <div key={i} className="p-3 rounded-lg bg-dark-300/50 hover:bg-dark-300/70 transition-colors cursor-pointer">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-secondary font-mono">{result.project}</span>
-                  <span className="text-xs text-gray-600">{result.time}</span>
-                </div>
-                <div 
-                  className="text-sm text-gray-400 [&_mark]:bg-secondary/30 [&_mark]:text-secondary [&_mark]:px-0.5 [&_mark]:rounded"
-                  dangerouslySetInnerHTML={{ __html: result.message }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (featureId === 'security') {
-    return (
-      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-        <div className="space-y-4">
-          {/* Scan result header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <ScanLine className="w-5 h-5 text-amber-400" />
-              <span className="font-medium text-amber-400">3 {t.features.sensitiveFound}</span>
-            </div>
-            <button className="px-3 py-1.5 rounded-lg bg-primary/20 text-primary text-sm hover:bg-primary/30 transition-colors">
-              {t.features.redactAll}
-            </button>
-          </div>
-          
-          {/* Sensitive items list */}
-          <div className="space-y-2">
-            {[
-              { type: t.features.apiKey, value: 'sk-proj-****...****', line: 'L23' },
-              { type: t.features.password, value: 'DB_PASS=****', line: 'L45' },
-              { type: t.features.token, value: 'ghp_****...****', line: 'L67' },
-            ].map((item, i) => (
-              <div key={i} className="p-3 rounded-lg bg-dark-300/50 border border-amber-400/20">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileWarning className="w-4 h-4 text-amber-400" />
-                    <span className="text-sm text-gray-300">{item.type}</span>
-                    <span className="text-xs text-gray-600 font-mono">{item.line}</span>
-                  </div>
-                  <span className="text-xs text-gray-500 font-mono">{item.value}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Diff preview */}
-          <div className="p-3 rounded-lg bg-dark-200/50 border border-primary/20">
-            <div className="text-xs text-gray-500 mb-2">Diff Preview</div>
-            <div className="text-xs font-mono space-y-1">
-              <div className="text-red-400/80">- api_key = "sk-proj-abc123xyz"</div>
-              <div className="text-secondary">+ api_key = "[REDACTED]"</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (featureId === 'insights') {
-    return (
-      <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-        <div className="space-y-4">
-          {/* Token Usage Header */}
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">{t.features.tokenUsage}</span>
-            <span className="text-2xl font-bold text-white">12,847</span>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="h-3 bg-dark-200 rounded-full overflow-hidden">
-            <div className="h-full w-4/5 bg-gradient-to-r from-secondary to-primary rounded-full" />
-          </div>
-
-          {/* Token Breakdown */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-              <div className="text-lg font-bold text-primary">6,234</div>
-              <div className="text-xs text-gray-500">{t.features.input}</div>
-              <div className="text-xs text-gray-600">48.5%</div>
-            </div>
-            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-              <div className="text-lg font-bold text-secondary">4,512</div>
-              <div className="text-xs text-gray-500">{t.features.output}</div>
-              <div className="text-xs text-gray-600">35.1%</div>
-            </div>
-            <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-              <div className="text-lg font-bold text-amber-400">2,101</div>
-              <div className="text-xs text-gray-500">{t.features.cache}</div>
-              <div className="text-xs text-gray-600">16.4%</div>
-            </div>
-          </div>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-          {/* Stats Row */}
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2 text-gray-400">
-              <FolderOpen className="w-4 h-4 text-secondary" />
-              <span>12 {t.features.sessions}</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <MessageSquare className="w-4 h-4 text-primary" />
-              <span>847 {t.features.messages}</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <Wrench className="w-4 h-4 text-amber-400" />
-              <span>234 {t.features.toolCalls}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+function CompactCard({ icon: Icon, title, description, color }: {
+  icon: LucideIcon; title: string; description: string; color: PillarColor;
+}) {
+  const s = colorStyles[color];
   return (
-    <div className={`glass-dark rounded-2xl p-6 ${glowClass}`}>
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-secondary" />
-          <span className="font-medium">{t.features.privacyMode}</span>
+    <div className={`glass-dark rounded-xl p-6 hover:bg-white/5 transition-all duration-300 border-l-2 ${s.borderLeft}`}>
+      <div className="flex items-center gap-3 mb-3">
+        <div className={`p-2 rounded-lg ${s.bg}`}>
+          <Icon className={`w-5 h-5 ${s.text}`} />
         </div>
-        <div className="px-2 py-1 rounded-full bg-secondary/20 text-secondary text-xs">{t.features.active}</div>
+        <span className="text-lg font-semibold text-white">{title}</span>
       </div>
-      <div className="space-y-4">
-        <div className="p-4 rounded-xl bg-dark-200/50 border border-secondary/20">
-          <div className="flex items-center gap-2 mb-2">
-            <Lock className="w-4 h-4 text-secondary" />
-            <span className="text-sm text-gray-300">{t.features.localStorageOnly}</span>
-          </div>
-          <div className="text-xs text-gray-500">
-            ~/Library/Application Support/Mantra/sessions/
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-            <div className="flex items-center justify-center mb-1">
-              <Cpu className="w-4 h-4 text-secondary" />
-            </div>
-            <div className="text-xs text-gray-500">Rust</div>
-          </div>
-          <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-            <div className="text-lg font-bold text-white">0</div>
-            <div className="text-xs text-gray-500">{t.features.cloudUploads}</div>
-          </div>
-          <div className="p-3 rounded-lg bg-dark-300/50 text-center">
-            <div className="text-lg font-bold text-secondary">100%</div>
-            <div className="text-xs text-gray-500">{t.features.localData}</div>
-          </div>
-        </div>
+      <p className="text-sm text-gray-400 leading-relaxed">{description}</p>
+    </div>
+  );
+}
+
+function PillarCta() {
+  const { t } = useI18n();
+  return (
+    <div className="text-center py-8">
+      <div className="inline-flex flex-col sm:flex-row items-center gap-3">
+        <span className="text-gray-500 text-sm">{t.pillars.cta.label}</span>
+        <Link
+          to="/download"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 border border-primary/20 text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
+        >
+          <Download className="w-4 h-4" />
+          {t.pillars.cta.button}
+        </Link>
       </div>
     </div>
   );
