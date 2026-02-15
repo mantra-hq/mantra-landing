@@ -1,7 +1,6 @@
-import { Server, Clock, Import, GitBranch, Terminal, ShieldCheck, Search, ScanLine, Package, Download } from 'lucide-react';
+import { Clock, Import, GitBranch, Terminal, ShieldCheck, ScanLine, Package, Download, Filter, Share2, Radio, Wrench, Lock, FileText, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '../lib/i18n';
-import { McpGatewayVisual } from './visuals/McpGatewayVisual';
 import { TimeTravelVisual } from './visuals/TimeTravelVisual';
 import { SmartTakeoverVisual } from './visuals/SmartTakeoverVisual';
 
@@ -9,25 +8,31 @@ type LucideIcon = React.ComponentType<{ className?: string }>;
 
 type PillarColor = 'primary' | 'secondary' | 'primary-300';
 
-const colorStyles: Record<PillarColor, { text: string; bg: string; border: string; borderLeft: string }> = {
+const colorStyles: Record<PillarColor, { text: string; bg: string; border: string; glow: string }> = {
   primary: {
     text: 'text-primary',
     bg: 'bg-primary/10',
     border: 'border-primary/20',
-    borderLeft: 'border-primary/40',
+    glow: 'glow-primary',
   },
   secondary: {
     text: 'text-secondary',
     bg: 'bg-secondary/10',
     border: 'border-secondary/20',
-    borderLeft: 'border-secondary/40',
+    glow: 'glow-secondary',
   },
   'primary-300': {
     text: 'text-primary-300',
     bg: 'bg-primary-300/10',
     border: 'border-primary-300/20',
-    borderLeft: 'border-primary-300/40',
+    glow: '',
   },
+};
+
+const pillarPointIcons: Record<string, LucideIcon[]> = {
+  connect: [Clock, GitBranch, Filter],
+  enhance: [Share2, Package, Import, Terminal],
+  simplify: [ShieldCheck, ScanLine, ShieldCheck],
 };
 
 export function Features() {
@@ -43,190 +48,115 @@ export function Features() {
         </p>
       </div>
 
-      {/* Pillar 1: Connect */}
-      <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/3 to-transparent" />
-        <div className="relative max-w-6xl mx-auto px-6">
-          <PillarHeader
-            label={t.pillars.connect.label}
-            title={t.pillars.connect.title}
-            description={t.pillars.connect.description}
-            color="primary"
-          />
-          <HeroFeature
-            tagIcon={Server}
-            tagline={t.pillars.connect.hero.tagline}
-            title={t.pillars.connect.hero.title}
-            description={t.pillars.connect.hero.description}
-            color="primary"
-            visual={<McpGatewayVisual />}
-            reverse={false}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <CompactCard
-              icon={Import}
-              title={t.pillars.connect.compact[0].title}
-              description={t.pillars.connect.compact[0].description}
-              color="primary"
-            />
-            <CompactCard
-              icon={GitBranch}
-              title={t.pillars.connect.compact[1].title}
-              description={t.pillars.connect.compact[1].description}
-              color="primary"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Pillar 1: Replay — text LEFT, visual RIGHT */}
+      <PillarSection
+        pillar={t.pillars.connect}
+        icons={pillarPointIcons.connect}
+        color="primary"
+        visual={<TimeTravelVisual />}
+        reverse={false}
+        gradientFrom="from-primary/3"
+      />
 
       {/* Divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
-      {/* Pillar 2: Enhance */}
-      <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/3 to-transparent" />
-        <div className="relative max-w-6xl mx-auto px-6">
-          <PillarHeader
-            label={t.pillars.enhance.label}
-            title={t.pillars.enhance.title}
-            description={t.pillars.enhance.description}
-            color="secondary"
-          />
-          <HeroFeature
-            tagIcon={Clock}
-            tagline={t.pillars.enhance.hero.tagline}
-            title={t.pillars.enhance.hero.title}
-            description={t.pillars.enhance.hero.description}
-            color="secondary"
-            visual={<TimeTravelVisual />}
-            reverse={true}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <CompactCard
-              icon={Terminal}
-              title={t.pillars.enhance.compact[0].title}
-              description={t.pillars.enhance.compact[0].description}
-              color="secondary"
-            />
-            <CompactCard
-              icon={ShieldCheck}
-              title={t.pillars.enhance.compact[1].title}
-              description={t.pillars.enhance.compact[1].description}
-              color="secondary"
-            />
-          </div>
-
-          {/* Skills Hub Coming Soon Banner */}
-          <div className="mt-6 glass-dark rounded-xl p-4 border border-dashed border-white/10 flex flex-col sm:flex-row items-center gap-4">
-            <div className="p-2 rounded-lg bg-secondary/10 flex-shrink-0">
-              <Package className="w-5 h-5 text-secondary" />
-            </div>
-            <div className="flex items-center gap-3 flex-1">
-              <span className="text-sm font-medium text-white">{t.pillars.enhance.skillsHub.title}</span>
-              <span className="inline-flex px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs">
-                {t.pillars.enhance.skillsHub.badge}
-              </span>
-            </div>
-            <p className="text-sm text-gray-500">{t.pillars.enhance.skillsHub.description}</p>
-          </div>
-        </div>
-      </section>
+      {/* Pillar 2: Control Center — visual LEFT, text RIGHT */}
+      <PillarSection
+        pillar={t.pillars.enhance}
+        icons={pillarPointIcons.enhance}
+        color="secondary"
+        visual={<ControlCenterVisual />}
+        reverse={true}
+        gradientFrom="from-secondary/3"
+        id="mcp-hub"
+      />
 
       {/* Auxiliary CTA */}
       <PillarCta />
 
-      {/* Pillar 3: Simplify */}
-      <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-300/3 to-transparent" />
-        <div className="relative max-w-6xl mx-auto px-6">
-          <PillarHeader
-            label={t.pillars.simplify.label}
-            title={t.pillars.simplify.title}
-            description={t.pillars.simplify.description}
-            color="primary-300"
-          />
-          <HeroFeature
-            tagIcon={Import}
-            tagline={t.pillars.simplify.hero.tagline}
-            title={t.pillars.simplify.hero.title}
-            description={t.pillars.simplify.hero.description}
-            color="primary-300"
-            visual={<SmartTakeoverVisual />}
-            reverse={false}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <CompactCard
-              icon={Search}
-              title={t.pillars.simplify.compact[0].title}
-              description={t.pillars.simplify.compact[0].description}
-              color="primary-300"
-            />
-            <CompactCard
-              icon={ScanLine}
-              title={t.pillars.simplify.compact[1].title}
-              description={t.pillars.simplify.compact[1].description}
-              color="primary-300"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Pillar 3: Security — text LEFT, visual RIGHT */}
+      <PillarSection
+        pillar={t.pillars.simplify}
+        icons={pillarPointIcons.simplify}
+        color="primary-300"
+        visual={<SmartTakeoverVisual />}
+        reverse={false}
+        gradientFrom="from-primary-300/3"
+      />
     </>
   );
 }
 
-/* ── Sub-components ─────────────────────────────────────── */
+/* ── Unified Pillar Section ─────────────────────────────── */
 
-function PillarHeader({ label, title, description, color }: {
-  label: string; title: string; description: string; color: PillarColor;
+function PillarSection({ pillar, icons, color, visual, reverse, gradientFrom, id }: {
+  pillar: { label: string; title: string; titleHighlight?: string; description: string; points: { title: string; description: string }[]; tagline?: string };
+  icons: LucideIcon[];
+  color: PillarColor;
+  visual: React.ReactNode;
+  reverse: boolean;
+  gradientFrom: string;
+  id?: string;
 }) {
   const s = colorStyles[color];
-  return (
-    <div className="text-center mb-16">
-      <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${s.bg} border ${s.border} mb-4`}>
-        <span className={`text-sm font-medium ${s.text}`}>{label}</span>
-      </span>
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">{title}</h2>
-      <p className="text-lg text-gray-400 max-w-2xl mx-auto">{description}</p>
-    </div>
-  );
-}
 
-function HeroFeature({ tagIcon: TagIcon, tagline, title, description, color, visual, reverse }: {
-  tagIcon: LucideIcon; tagline: string; title: string; description: string;
-  color: PillarColor; visual: React.ReactNode; reverse: boolean;
-}) {
-  const s = colorStyles[color];
   return (
-    <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}>
-      <div className="flex-1 space-y-4">
-        <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${s.bg}`}>
-          <TagIcon className={`w-4 h-4 ${s.text}`} />
-          <span className={`text-sm font-medium ${s.text}`}>{tagline}</span>
-        </span>
-        <h3 className="text-3xl md:text-4xl font-bold text-white">{title}</h3>
-        <p className="text-lg text-gray-400 leading-relaxed">{description}</p>
-      </div>
-      <div className="flex-1 w-full">{visual}</div>
-    </div>
-  );
-}
+    <section id={id} className="py-24 relative">
+      <div className={`absolute inset-0 bg-gradient-to-b ${gradientFrom} to-transparent`} />
+      <div className="relative max-w-6xl mx-auto px-6">
+        <div className={`flex flex-col ${reverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16`}>
+          {/* Text side */}
+          <div className="lg:w-5/12">
+            <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${s.bg} border ${s.border} mb-6`}>
+              <span className={`text-sm font-medium ${s.text}`}>{pillar.label}</span>
+            </span>
 
-function CompactCard({ icon: Icon, title, description, color }: {
-  icon: LucideIcon; title: string; description: string; color: PillarColor;
-}) {
-  const s = colorStyles[color];
-  return (
-    <div className={`glass-dark rounded-xl p-6 hover:bg-white/5 transition-all duration-300 border-l-2 ${s.borderLeft}`}>
-      <div className="flex items-center gap-3 mb-3">
-        <div className={`p-2 rounded-lg ${s.bg}`}>
-          <Icon className={`w-5 h-5 ${s.text}`} />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              {pillar.title}
+              {pillar.titleHighlight && (
+                <>
+                  <br />
+                  <span className="text-gradient">{pillar.titleHighlight}</span>
+                </>
+              )}
+            </h2>
+
+            <p className="text-base text-gray-400 mb-8 leading-relaxed">{pillar.description}</p>
+
+            <div className="space-y-5">
+              {pillar.points.map((point, i) => {
+                const Icon = icons[i] || icons[0];
+                return (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className={`flex-shrink-0 w-9 h-9 rounded-lg ${s.bg} flex items-center justify-center`}>
+                      <Icon className={`w-4 h-4 ${s.text}`} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-white mb-1">{point.title}</h4>
+                      <p className="text-sm text-gray-400 leading-relaxed">{point.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {pillar.tagline && (
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <p className="text-sm text-gray-500 italic">{pillar.tagline}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Visual side */}
+          <div className="lg:w-7/12 w-full">{visual}</div>
         </div>
-        <span className="text-lg font-semibold text-white">{title}</span>
       </div>
-      <p className="text-sm text-gray-400 leading-relaxed">{description}</p>
-    </div>
+    </section>
   );
 }
+
+/* ── Sub-components ─────────────────────────────────────── */
 
 function PillarCta() {
   const { t } = useI18n();
@@ -241,6 +171,99 @@ function PillarCta() {
           <Download className="w-4 h-4" />
           {t.pillars.cta.button}
         </Link>
+      </div>
+    </div>
+  );
+}
+
+function ControlCenterVisual() {
+  const { lang } = useI18n();
+
+  const servicesTitle = lang === 'zh' ? '已安装的 MCP 服务' : 'Installed MCP Services';
+  const addService = lang === 'zh' ? '+ 添加服务' : '+ Add Service';
+
+  const navItems = [
+    { icon: Radio, label: lang === 'zh' ? '服务' : 'Services', active: true },
+    { icon: Package, label: 'Skills', active: false },
+    { icon: Wrench, label: lang === 'zh' ? '工具' : 'Tools', active: false },
+    { icon: Lock, label: lang === 'zh' ? '权限' : 'Policies', active: false },
+    { icon: FileText, label: lang === 'zh' ? '日志' : 'Logs', active: false },
+  ];
+
+  const services = [
+    { name: 'GitHub API', status: 'Running', tools: 3, apps: 3 },
+    { name: 'Supabase', status: 'Running', tools: 5, apps: 2 },
+    { name: 'File System', status: 'Running', tools: 4, apps: 3 },
+  ];
+
+  return (
+    <div className="glass-dark rounded-2xl overflow-hidden glow-secondary">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 py-3 bg-dark-500/50 border-b border-white/5">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-red-500/50" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+            <div className="w-3 h-3 rounded-full bg-green-500/50" />
+          </div>
+          <span className="text-sm text-gray-400 font-mono">
+            Mantra — {lang === 'zh' ? '中控台' : 'Control Center'}
+          </span>
+        </div>
+      </div>
+
+      {/* Content area */}
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="w-36 border-r border-white/5 py-4 px-3 hidden md:block">
+          <div className="space-y-1">
+            {navItems.map((item) => {
+              const NavIcon = item.icon;
+              return (
+                <div
+                  key={item.label}
+                  className={`flex items-center gap-2 px-2 py-1.5 rounded text-xs ${
+                    item.active ? 'bg-secondary/10 text-secondary' : 'text-gray-500'
+                  }`}
+                >
+                  <NavIcon className="w-3.5 h-3.5" />
+                  <span>{item.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="flex-1 p-4">
+          <div className="text-sm font-medium text-white mb-1">{servicesTitle}</div>
+          <div className="h-px bg-white/5 mb-3" />
+
+          <div className="space-y-2">
+            {services.map((service) => (
+              <div key={service.name} className="p-3 rounded-lg bg-dark-300/30 border border-white/5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-secondary" />
+                    <span className="text-sm text-white">{service.name}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-secondary" />
+                    <span className="text-xs text-secondary">{service.status}</span>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {service.tools} tools · Shared to {service.apps} apps
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Add button */}
+          <div className="mt-3 w-full p-2 rounded-lg border border-dashed border-white/10 text-xs text-gray-500 text-center hover:border-secondary/30 hover:text-secondary transition-colors cursor-pointer">
+            {addService}
+          </div>
+        </div>
       </div>
     </div>
   );

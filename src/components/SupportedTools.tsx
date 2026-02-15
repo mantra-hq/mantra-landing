@@ -1,4 +1,3 @@
-import { Clock, Server } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import claudeCodeIcon from '../assets/icon-claudecode.svg';
 import cursorIcon from '../assets/icon-cursor.png';
@@ -20,25 +19,10 @@ export function SupportedTools() {
   return (
     <section className="py-24 relative">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-4">
-          <h2 className="text-3xl font-bold mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold">
             {t.tools.title} <span className="text-gradient">{t.tools.titleHighlight}</span>
           </h2>
-          <p className="text-gray-400">
-            {t.tools.subtitle}
-          </p>
-        </div>
-
-        {/* Dual capability tags */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 mb-12">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-            <Clock className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">{t.tools.capabilityReplay}</span>
-          </span>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20">
-            <Server className="w-4 h-4 text-secondary" />
-            <span className="text-sm font-medium text-secondary">{t.tools.capabilityMcp}</span>
-          </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
