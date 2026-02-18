@@ -22,43 +22,43 @@ export function BeyondSection() {
       icon: Clock,
       title: lang === 'zh' ? '时空穿梭' : 'Time Travel',
       description: lang === 'zh'
-        ? '基于 Git 历史像素级还原每一行代码变迁，拖动进度条，让开发过程如电影般重现。'
-        : 'Pixel-level code restoration based on Git history. Drag the timeline and replay the development process like a movie.',
+        ? '拖动时间轴，代码和对话瞬间回到那一刻。'
+        : 'Drag the timeline — code and conversation jump back instantly.',
     },
     {
       icon: Monitor,
       title: lang === 'zh' ? 'MCP 中控台' : 'MCP Control Center',
       description: lang === 'zh'
-        ? '一站式管理所有 MCP 服务。细粒度的权限控制，内置调试器，让扩展能力触手可及。'
-        : 'Manage all MCP services in one place. Fine-grained permissions, built-in debugger, extensions at your fingertips.',
+        ? '统一配置、调试、管控所有 MCP 服务。'
+        : 'Configure, debug, and manage all MCP services in one place.',
     },
     {
       icon: Wrench,
       title: lang === 'zh' ? '技能分发中心' : 'Skill Distribution',
       description: lang === 'zh'
-        ? '一次配置 Skills，自动同步至所有 AI 工具。打造属于你的高效工具链。'
-        : 'Configure Skills once, auto-sync to all AI tools. Build your own efficient toolchain.',
+        ? 'Skills 配置一次，自动同步到所有 AI 工具。'
+        : 'Configure Skills once, auto-sync to every AI tool.',
     },
     {
       icon: Search,
       title: lang === 'zh' ? '精准检索' : 'Precise Search',
       description: lang === 'zh'
-        ? '多维度筛选 + 全文搜索，瞬间定位任何历史片段，不再为找一段代码翻遍记录。'
-        : 'Multi-dimensional filtering + full-text search. Instantly locate any historical snippet.',
+        ? 'Cmd+K 跨项目、跨会话全文搜索，秒级定位。'
+        : 'Cmd+K full-text search across all projects and sessions.',
     },
     {
       icon: ShieldCheck,
       title: lang === 'zh' ? '智能脱敏' : 'Smart Redaction',
       description: lang === 'zh'
-        ? '敏感信息自动识别与遮蔽。分享会话从未如此安心，彻底告别密钥泄露风险。'
-        : 'Auto-detect and mask sensitive info. Share sessions with confidence, no more key leak risks.',
+        ? '自动识别敏感信息，一键遮蔽后放心分享。'
+        : 'Auto-detect sensitive info, one-click redaction before sharing.',
     },
     {
       icon: FolderOpen,
       title: lang === 'zh' ? '全平台聚合' : 'Cross-Platform',
       description: lang === 'zh'
-        ? 'Claude Code、Cursor、Gemini CLI... 所有 AI 编程助手的历史，一个视图，尽收眼底。'
-        : 'Claude Code, Cursor, Gemini CLI... All AI coding assistant histories in a single unified view.',
+        ? '所有 AI 编程助手的历史，一个视图尽收眼底。'
+        : 'All AI coding assistant histories in a single unified view.',
     },
   ];
 
