@@ -6,6 +6,7 @@ import { Hero } from './components/Hero';
 import { Features } from './components/Features';
 import { SupportedTools } from './components/SupportedTools';
 import { MakerStory } from './components/MakerStory';
+import { BeyondSection } from './components/BeyondSection';
 import { Pricing } from './components/Pricing';
 import { PricingPage } from './pages/PricingPage';
 import { DownloadPage } from './pages/DownloadPage';
@@ -29,6 +30,7 @@ function HomePage() {
       <Hero />
       <SupportedTools />
       <Features />
+      <BeyondSection />
       <Pricing />
       <MakerStory />
     </>

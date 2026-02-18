@@ -78,8 +78,9 @@ function TimelinePreview() {
   const { t, lang } = useI18n();
 
   return (
-    <div className="glass-dark rounded-2xl p-6 max-w-3xl mx-auto">
-      <div className="flex items-center gap-3 mb-4">
+    <div className="glass-dark rounded-2xl max-w-3xl mx-auto overflow-hidden">
+      {/* Window title bar */}
+      <div className="flex items-center gap-3 px-5 py-3 border-b border-white/5">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/60" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
@@ -88,61 +89,84 @@ function TimelinePreview() {
         <span className="text-sm text-gray-500 font-mono">session_2024_01_15.jsonl</span>
       </div>
 
-      <div className="relative py-2">
-        <div className="h-2 bg-dark-200 rounded-full overflow-hidden">
-          <div className="h-full w-3/5 bg-gradient-to-r from-primary to-secondary rounded-full" />
-        </div>
-        
-        {/* Draggable playhead */}
-        <div
-          className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-primary cursor-grab hover:scale-110 transition-transform"
-          style={{ left: '60%', transform: 'translate(-50%, -50%)' }}
-        />
-        
-        {/* User message markers (blue dots) */}
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: '8%' }} title={lang === 'zh' ? '用户消息' : 'User message'} />
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: '25%' }} />
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: '48%' }} />
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: '72%' }} />
-        <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: '88%' }} />
-        
-        {/* Git commit markers (green squares) */}
-        <div className="absolute top-1/2 w-2.5 h-2.5 bg-secondary rounded-sm shadow-sm" style={{ left: '18%', transform: 'translate(-50%, -50%)' }} title="Git commit" />
-        <div className="absolute top-1/2 w-2.5 h-2.5 bg-secondary rounded-sm shadow-sm" style={{ left: '42%', transform: 'translate(-50%, -50%)' }} />
-        <div className="absolute top-1/2 w-2.5 h-2.5 bg-secondary rounded-sm shadow-sm" style={{ left: '65%', transform: 'translate(-50%, -50%)' }} />
-        <div className="absolute top-1/2 w-2.5 h-2.5 bg-secondary rounded-sm shadow-sm" style={{ left: '95%', transform: 'translate(-50%, -50%)' }} />
+      <div className="p-5 space-y-4">
+        {/* Timeline track */}
+        <div className="relative py-2">
+          <div className="h-2 bg-dark-200 rounded-full overflow-hidden">
+            <div className="h-full w-3/5 bg-gradient-to-r from-primary to-secondary rounded-full" />
+          </div>
 
-        <div className="flex justify-between mt-4 text-xs text-gray-500 font-mono">
-          <span>00:00</span>
-          <span className="text-primary">12:34</span>
-          <span>20:45</span>
-        </div>
-      </div>
-      
-      {/* Timeline legend */}
-      <div className="flex items-center justify-center gap-6 mt-3 mb-4 text-xs text-gray-500">
-        <div className="flex items-center gap-1.5">
-          <div className="w-2 h-2 bg-primary rounded-full" />
-          <span>{lang === 'zh' ? '用户消息' : 'User'}</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <div className="w-2 h-2 bg-secondary rounded-sm" />
-          <span>Git Commit</span>
-        </div>
-      </div>
+          {/* Playhead */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-primary"
+            style={{ left: '60%', transform: 'translate(-50%, -50%)' }}
+          />
 
-      <div className="grid grid-cols-3 gap-3 text-center">
-        <div className="p-3 rounded-lg bg-dark-300/50">
-          <div className="text-2xl font-bold text-primary">47</div>
-          <div className="text-xs text-gray-500">{t.hero.messages}</div>
+          {/* User message markers */}
+          {[8, 25, 48, 72, 88].map((pos, idx) => (
+            <div key={`u${idx}`} className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" style={{ left: `${pos}%` }} />
+          ))}
+
+          {/* Git commit markers */}
+          {[18, 42, 65, 95].map((pos, idx) => (
+            <div key={`g${idx}`} className="absolute top-1/2 w-2.5 h-2.5 bg-secondary rounded-sm shadow-sm" style={{ left: `${pos}%`, transform: 'translate(-50%, -50%)' }} />
+          ))}
+
+          <div className="flex justify-between mt-4 text-xs text-gray-500 font-mono">
+            <span>00:00</span>
+            <span className="text-primary">12:34</span>
+            <span>20:45</span>
+          </div>
         </div>
-        <div className="p-3 rounded-lg bg-dark-300/50">
-          <div className="text-2xl font-bold text-secondary">12</div>
-          <div className="text-xs text-gray-500">{t.hero.toolCalls}</div>
+
+        {/* Timeline legend */}
+        <div className="flex items-center justify-center gap-6 text-xs text-gray-500">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 bg-primary rounded-full" />
+            <span>{lang === 'zh' ? '用户消息' : 'User'}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 bg-secondary rounded-sm" />
+            <span>Git Commit</span>
+          </div>
         </div>
-        <div className="p-3 rounded-lg bg-dark-300/50">
-          <div className="text-2xl font-bold text-white">8.2k</div>
-          <div className="text-xs text-gray-500">{t.hero.tokens}</div>
+
+        {/* Mini code snapshot preview */}
+        <div className="rounded-lg bg-dark-300/50 p-3">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-mono text-gray-400">src/auth/middleware.js</span>
+            <span className="text-[10px] text-gray-600 font-mono">@ 12:34</span>
+          </div>
+          <div className="font-mono text-[11px] leading-relaxed space-y-0.5">
+            <div className="px-1.5 py-px rounded-sm bg-[var(--diff-remove)]">
+              <span className="text-red-400 select-none">- </span>
+              <span className="text-red-400">{"const basicAuth = require('./basic');"}</span>
+            </div>
+            <div className="px-1.5 py-px rounded-sm bg-[var(--diff-add)]">
+              <span className="text-green-400 select-none">+ </span>
+              <span className="text-green-400">{"const jwt = require('jsonwebtoken');"}</span>
+            </div>
+            <div className="px-1.5 py-px rounded-sm bg-[var(--diff-add)]">
+              <span className="text-green-400 select-none">+ </span>
+              <span className="text-green-400">{'const verifyToken = (req, res, next) => {'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div className="p-3 rounded-lg bg-dark-300/50">
+            <div className="text-2xl font-bold text-primary">47</div>
+            <div className="text-xs text-gray-500">{t.hero.messages}</div>
+          </div>
+          <div className="p-3 rounded-lg bg-dark-300/50">
+            <div className="text-2xl font-bold text-secondary">12</div>
+            <div className="text-xs text-gray-500">{t.hero.toolCalls}</div>
+          </div>
+          <div className="p-3 rounded-lg bg-dark-300/50">
+            <div className="text-2xl font-bold text-white">8.2k</div>
+            <div className="text-xs text-gray-500">{t.hero.tokens}</div>
+          </div>
         </div>
       </div>
     </div>
