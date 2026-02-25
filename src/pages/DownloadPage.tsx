@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Download, Apple, Monitor, ExternalLink } from 'lucide-react';
+import { Download, Apple, Monitor, ExternalLink, ChevronDown, AlertCircle, Terminal } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
 import mantraIcon from '../assets/icon-mantra.png';
 
@@ -84,6 +84,7 @@ export function DownloadPage() {
   const [release, setRelease] = useState<Release | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [macTipOpen, setMacTipOpen] = useState(false);
 
   const userPlatform = useMemo(() => detectPlatform(), []);
   const macArch = useMemo(() => detectMacArch(), []);
@@ -236,6 +237,76 @@ export function DownloadPage() {
                   <Download className="w-5 h-5" />
                   {primaryDownload.label}
                 </a>
+              )}
+
+              {userPlatform === 'mac' && (
+                <div className="mt-2 mb-2 text-left max-w-sm mx-auto">
+                  <button
+                    onClick={() => setMacTipOpen(o => !o)}
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors w-full"
+                  >
+                    <AlertCircle className="w-4 h-4 text-yellow-400/80 shrink-0" />
+                    <span>
+                      {lang === 'zh'
+                        ? 'DMG 提示"文件损坏"或被阻止打开？'
+                        : 'DMG says "damaged" or blocked from opening?'}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 ml-auto shrink-0 transition-transform duration-200 ${macTipOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+
+                  {macTipOpen && (
+                    <div className="mt-3 p-4 bg-dark-500/60 border border-white/10 rounded-xl text-sm text-gray-300 space-y-4">
+                      {/* Step 1 */}
+                      <div>
+                        <p className="font-medium text-white mb-1">
+                          {lang === 'zh' ? '① 确认下载了正确的版本' : '① Download the right build'}
+                        </p>
+                        <p className="text-gray-400">
+                          {lang === 'zh'
+                            ? 'Apple Silicon Mac（M1 / M2 / M3 / M4）请下载 '
+                            : 'Apple Silicon Macs (M1 / M2 / M3 / M4) need the '}
+                          <span className="text-white font-mono">Apple Silicon (.dmg)</span>
+                          {lang === 'zh' ? '，Intel Mac 请下载 ' : ', Intel Macs need '}
+                          <span className="text-white font-mono">Intel (.dmg)</span>
+                          {lang === 'zh' ? '。' : '.'}
+                        </p>
+                      </div>
+
+                      {/* Step 2 */}
+                      <div>
+                        <p className="font-medium text-white mb-1">
+                          {lang === 'zh' ? '② 绕过 Gatekeeper 安全检查' : '② Bypass Gatekeeper'}
+                        </p>
+                        <p className="text-gray-400 mb-2">
+                          {lang === 'zh'
+                            ? 'macOS 会阻止未经 Apple 公证的应用。右键点击 DMG 文件，选择「打开」，再次点击「打开」确认即可。或者在终端运行：'
+                            : 'macOS blocks apps not notarized by Apple. Right-click the DMG → Open → confirm Open. Or run in Terminal:'}
+                        </p>
+                        <div className="flex items-center gap-2 px-3 py-2 bg-dark-600/80 rounded-lg border border-white/10">
+                          <Terminal className="w-4 h-4 text-gray-500 shrink-0" />
+                          <code className="text-green-400 font-mono text-xs break-all">
+                            xattr -cr ~/Downloads/Mantra-*.dmg
+                          </code>
+                        </div>
+                      </div>
+
+                      {/* Discord */}
+                      <p className="text-gray-500 text-xs pt-1 border-t border-white/5">
+                        {lang === 'zh' ? '仍有问题？' : 'Still stuck? '}
+                        <a
+                          href="https://discord.gg/hZ73MMfJxy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline"
+                        >
+                          {lang === 'zh' ? '加入 Discord 社区获取帮助' : 'Join our Discord for help'}
+                        </a>
+                      </p>
+                    </div>
+                  )}
+                </div>
               )}
 
               <p className="text-gray-500 text-sm font-mono">
