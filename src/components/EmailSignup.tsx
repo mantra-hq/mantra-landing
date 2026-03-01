@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Mail, Check, Copy, Users, Gift, Loader2, Infinity, Briefcase, MessageCircle } from 'lucide-react';
+import { Mail, Check, Copy, Users, Gift, Loader2, Bell, Shield, Compass } from 'lucide-react';
 import { generateReferralCode, getReferralFromUrl } from '../lib/supabase';
 import { useI18n } from '../lib/i18n';
 
@@ -166,7 +166,7 @@ export function EmailSignup() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="glass-dark rounded-xl p-5 text-center">
             <div className="w-12 h-12 mx-auto rounded-xl bg-primary/20 flex items-center justify-center mb-4">
-              <Infinity className="w-6 h-6 text-primary" />
+              <Bell className="w-6 h-6 text-primary" />
             </div>
             <h4 className="font-semibold text-white mb-2">{t.signup.benefitLifetime}</h4>
             <p className="text-sm text-gray-400">{t.signup.benefitLifetimeDesc}</p>
@@ -174,7 +174,7 @@ export function EmailSignup() {
 
           <div className="glass-dark rounded-xl p-5 text-center">
             <div className="w-12 h-12 mx-auto rounded-xl bg-secondary/20 flex items-center justify-center mb-4">
-              <Briefcase className="w-6 h-6 text-secondary" />
+              <Shield className="w-6 h-6 text-secondary" />
             </div>
             <h4 className="font-semibold text-white mb-2">{t.signup.benefitCommercial}</h4>
             <p className="text-sm text-gray-400">{t.signup.benefitCommercialDesc}</p>
@@ -182,7 +182,7 @@ export function EmailSignup() {
 
           <div className="glass-dark rounded-xl p-5 text-center">
             <div className="w-12 h-12 mx-auto rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
-              <MessageCircle className="w-6 h-6 text-purple-400" />
+              <Compass className="w-6 h-6 text-purple-400" />
             </div>
             <h4 className="font-semibold text-white mb-2">{t.signup.benefitCommunity}</h4>
             <p className="text-sm text-gray-400">{t.signup.benefitCommunityDesc}</p>
