@@ -14,7 +14,7 @@ export function Header() {
   const urls = getLocalizedUrls(lang);
   const docsUrl = urls.docs;
   const blogUrl = urls.blog;
-  const faqUrl = `${urls.about}${PAGE_PATHS.faq}`;
+  const faqUrl = urls.withUtm(`${urls.about}${PAGE_PATHS.faq}`);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);

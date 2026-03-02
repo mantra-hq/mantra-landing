@@ -7,16 +7,17 @@ export function Footer() {
   const { t, lang } = useI18n();
 
   const urls = getLocalizedUrls(lang);
+  const { withUtm } = urls;
 
   const productLinks = [
     { label: t.footer.features, href: '#features' },
-    { label: t.footer.security, href: `${urls.about}${PAGE_PATHS.security}` },
+    { label: t.footer.security, href: withUtm(`${urls.about}${PAGE_PATHS.security}`) },
   ];
 
   const resourceLinks = [
     { label: t.footer.docs, href: urls.docs },
-    { label: t.footer.faq, href: `${urls.about}${PAGE_PATHS.faq}` },
-    { label: t.footer.license, href: `${urls.about}${PAGE_PATHS.license}` },
+    { label: t.footer.faq, href: withUtm(`${urls.about}${PAGE_PATHS.faq}`) },
+    { label: t.footer.license, href: withUtm(`${urls.about}${PAGE_PATHS.license}`) },
   ];
 
   const contactLinks = [
@@ -110,14 +111,14 @@ export function Footer() {
             <div className="flex items-center gap-4 text-xs text-gray-500">
               <span>{t.footer.copyright}</span>
               <a
-                href={`${urls.about}${PAGE_PATHS.privacy}`}
+                href={withUtm(`${urls.about}${PAGE_PATHS.privacy}`)}
                 className="hover:text-white transition-colors"
               >
                 {t.footer.privacy}
               </a>
               <span>•</span>
               <a
-                href={`${urls.about}${PAGE_PATHS.terms}`}
+                href={withUtm(`${urls.about}${PAGE_PATHS.terms}`)}
                 className="hover:text-white transition-colors"
               >
                 {t.footer.terms}

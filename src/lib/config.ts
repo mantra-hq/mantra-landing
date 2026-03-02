@@ -5,14 +5,26 @@ export const SITE_URLS = {
   blog: 'https://blog.mantra.gonewx.com',
 } as const;
 
+// UTM parameters for cross-domain attribution
+const UTM_LANDING = 'utm_source=website&utm_medium=landing';
+
+function withUtm(url: string): string {
+  return url + (url.includes('?') ? '&' : '?') + UTM_LANDING;
+}
+
 // Get localized URLs based on language
 export function getLocalizedUrls(lang: 'zh' | 'en') {
   const isZh = lang === 'zh';
 
+  const docsBase = isZh ? SITE_URLS.docs : `${SITE_URLS.docs}/en`;
+  const blogBase = isZh ? `${SITE_URLS.blog}/zh` : SITE_URLS.blog;
+  const aboutBase = isZh ? `${SITE_URLS.docs}/about` : `${SITE_URLS.docs}/en/about`;
+
   return {
-    docs: isZh ? SITE_URLS.docs : `${SITE_URLS.docs}/en`,
-    blog: isZh ? `${SITE_URLS.blog}/zh` : SITE_URLS.blog,
-    about: isZh ? `${SITE_URLS.docs}/about` : `${SITE_URLS.docs}/en/about`,
+    docs: withUtm(docsBase),
+    blog: withUtm(blogBase),
+    about: aboutBase, // about is a base path, UTM added when final URL is built
+    withUtm,
   };
 }
 
