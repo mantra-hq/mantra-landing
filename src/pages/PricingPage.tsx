@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, ChevronDown, ChevronUp, Download, Sparkles, Building2, RefreshCw, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '../lib/i18n';
 
 export function PricingPage() {
@@ -60,13 +61,13 @@ export function PricingPage() {
                   <div className="text-5xl font-bold text-secondary">$0</div>
                   <div className="text-gray-500">forever</div>
                 </div>
-                <button
-                  disabled
-                  className="px-8 py-3 rounded-xl bg-secondary/50 text-dark-600/70 font-semibold cursor-not-allowed flex items-center gap-2"
+                <Link
+                  to="/download"
+                  className="px-8 py-3 rounded-xl bg-secondary text-dark-600 font-semibold hover:bg-secondary/90 transition-colors flex items-center gap-2"
                 >
                   <Download className="w-5 h-5" />
-                  {comingSoon}
-                </button>
+                  {t.pricing.free.cta}
+                </Link>
               </div>
             </div>
           </div>
