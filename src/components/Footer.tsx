@@ -18,6 +18,7 @@ export function Footer() {
     { label: t.footer.docs, href: urls.docs },
     { label: t.footer.faq, href: withUtm(`${urls.about}${PAGE_PATHS.faq}`) },
     { label: t.footer.license, href: withUtm(`${urls.about}${PAGE_PATHS.license}`) },
+    { label: t.footer.reportIssue, href: 'https://github.com/mantra-hq/mantra-releases/issues' },
   ];
 
   const contactLinks = [
@@ -70,6 +71,8 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {link.label}
