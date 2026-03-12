@@ -19,9 +19,11 @@ export function getLocalizedUrls(lang: 'zh' | 'en') {
   const docsBase = isZh ? SITE_URLS.docs : `${SITE_URLS.docs}/en`;
   const blogBase = isZh ? `${SITE_URLS.blog}/zh` : SITE_URLS.blog;
   const aboutBase = isZh ? `${SITE_URLS.docs}/about` : `${SITE_URLS.docs}/en/about`;
+  const quickstartPath = isZh ? '/guide/getting-started' : '/en/guide/getting-started';
 
   return {
     docs: withUtm(docsBase),
+    quickstart: withUtm(docsBase + quickstartPath),
     blog: withUtm(blogBase),
     about: aboutBase, // about is a base path, UTM added when final URL is built
     withUtm,

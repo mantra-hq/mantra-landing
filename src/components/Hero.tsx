@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Download, Sparkles } from 'lucide-react';
 import { useI18n } from '../lib/i18n';
+import { getLocalizedUrls } from '../lib/config';
 import mantraIcon from '../assets/icon-mantra.png';
 
 export function Hero() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -50,20 +51,23 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              to="/download"
+              to="/download?utm_source=landing&utm_medium=hero"
               className="group relative px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 glow-primary flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
               {t.hero.downloadAlpha}
             </Link>
             <a
-              href="#features"
+              href={getLocalizedUrls(lang).quickstart}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 glass hover:bg-white/10 text-white font-medium rounded-xl transition-all duration-300 flex items-center gap-2"
             >
-              <Sparkles className="w-5 h-5 text-secondary" />
-              {t.hero.exploreFeatures}
+              {t.hero.quickStart}
             </a>
           </div>
+          <p className="mt-3 text-sm text-gray-500">{t.hero.downloadSubline}</p>
+          <p className="mt-2 text-xs text-gray-600">{t.hero.trustLine}</p>
         </div>
 
         <div className="mt-20 animate-slide-up" style={{ animationDelay: '0.3s' }}>

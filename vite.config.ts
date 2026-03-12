@@ -40,4 +40,7 @@ export default defineConfig({
   },
   // Disable SPA fallback - we handle routing manually above
   appType: 'mpa',
+  server: {
+    host: true, // listen on 0.0.0.0 so dev server is reachable from browser/Playwright
+  },
 });
