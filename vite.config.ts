@@ -4,7 +4,7 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 
 // React Router paths that should fallback to index.html
-const reactRoutes = ['/pricing'];
+const reactRoutes = ['/pricing', '/download'];
 
 // https://vitejs.dev/config/
 export default defineConfig({

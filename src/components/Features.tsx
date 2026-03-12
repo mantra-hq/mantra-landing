@@ -91,7 +91,7 @@ export function Features() {
 /* ── Unified Pillar Section ─────────────────────────────── */
 
 function PillarSection({ pillar, icons, color, visual, reverse, gradientFrom, id }: {
-  pillar: { label: string; title: string; titleHighlight?: string; description: string; points: { title: string; description: string }[]; tagline?: string };
+  pillar: { label: string; title: string; titleHighlight?: string; description: string; points: readonly { title: string; description: string }[]; tagline?: string };
   icons: LucideIcon[];
   color: PillarColor;
   visual: React.ReactNode;
