@@ -351,7 +351,7 @@ const translations = {
           name: 'Commercial',
           price: '$50',
           period: '/user/year',
-          description: 'Use Mantra for work in a company or as a freelancer.',
+          description: 'Support Mantra\'s independence. Encouraged for organizational use.',
           features: [
             'Use in for-profit organizations',
             'Priority email support',
@@ -369,7 +369,7 @@ const translations = {
           },
           {
             q: 'Do I need to pay for commercial use?',
-            a: 'If you use Mantra for work in a company of 2 or more people, a commercial license is required. Solo freelancers and students can use Personal for free.',
+            a: 'No. A commercial license is not mandatory, but if you use Mantra for work in an organization, we encourage you to purchase one to keep Mantra independent and 100% user-supported.',
           },
           {
             q: 'Does my data stay on my device?',
@@ -735,7 +735,7 @@ const translations = {
           name: 'Commercial 商用',
           price: '$50',
           period: '/人/年',
-          description: '在公司或作为自由职业者使用 Mantra。',
+          description: '支持 Mantra 独立发展，鼓励组织用户购买。',
           features: [
             '可在营利性组织中使用',
             '优先邮件支持',
@@ -753,7 +753,7 @@ const translations = {
           },
           {
             q: '商业使用需要付费吗？',
-            a: '如果你在 2 人或以上的公司中使用 Mantra，需要购买商用许可。个人自由职业者和学生可以免费使用个人版。',
+            a: '不需要。购买商业许可证并非强制要求，但如果你在组织中使用 Mantra 进行工作，我们鼓励你购买商业许可证，以保持 Mantra 的独立性和 100% 用户支持。',
           },
           {
             q: '我的数据会保留在本地吗？',
