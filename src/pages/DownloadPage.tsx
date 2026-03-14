@@ -232,6 +232,14 @@ export function DownloadPage() {
               {primaryDownload && (
                 <a
                   href={primaryDownload.url}
+                  onClick={() => {
+                    (window as any).posthog?.capture('download_clicked', {
+                      platform: userPlatform,
+                      package_type: userPlatform === 'mac' ? (macArch === 'arm64' ? 'dmg-arm64' : 'dmg-x64') : userPlatform === 'windows' ? 'msi' : 'appimage',
+                      version,
+                      source: 'primary_cta',
+                    });
+                  }}
                   className="inline-flex items-center gap-3 px-8 py-4 bg-primary hover:bg-primary/90 text-white font-medium rounded-xl transition-all hover:scale-[1.02] mb-4"
                 >
                   <Download className="w-5 h-5" />
@@ -343,6 +351,14 @@ export function DownloadPage() {
                           <a
                             key={pkg.type}
                             href={link.url}
+                            onClick={() => {
+                              (window as any).posthog?.capture('download_clicked', {
+                                platform: section.platform,
+                                package_type: pkg.type,
+                                version,
+                                source: 'platform_list',
+                              });
+                            }}
                             className="group flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
                           >
                             <Download className="w-4 h-4 opacity-70 group-hover:opacity-100" />
