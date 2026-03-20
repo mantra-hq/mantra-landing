@@ -287,7 +287,7 @@ export function DownloadPage() {
                         <div className="flex items-center gap-2 px-3 py-2 bg-dark-600/80 rounded-lg border border-white/10">
                           <Terminal className="w-4 h-4 text-gray-500 shrink-0" />
                           <code className="text-green-400 font-mono text-xs break-all">
-                            xattr -cr ~/Downloads/Mantra-*.dmg
+                            xattr -cr /Applications/Mantra.app
                           </code>
                         </div>
                       </div>
