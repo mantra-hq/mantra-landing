@@ -1,0 +1,8 @@
+# Mantra Landing - robots.txt
+# https://mantra.gonewx.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://mantra.gonewx.com/sitemap.xml

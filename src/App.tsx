@@ -15,12 +15,23 @@ import { DownloadPage } from './pages/DownloadPage';
 import { Footer } from './components/Footer';
 import { StarfieldBackground } from './components/StarfieldBackground';
 
-// 路由切换时滚动到顶部
+// 路由切换时滚动到顶部 + 更新 canonical 标签
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const canonicalUrl = `https://mantra.gonewx.com${pathname === '/' ? '/' : pathname}`;
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (link) {
+      link.href = canonicalUrl;
+    } else {
+      link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = canonicalUrl;
+      document.head.appendChild(link);
+    }
   }, [pathname]);
 
   return null;

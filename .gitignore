@@ -37,3 +37,6 @@ public/blog/
 
 .wrangler/
 .playwright-mcp/
+
+# OG image generation fonts (downloaded at build time)
+scripts/fonts/

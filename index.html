@@ -5,12 +5,170 @@
     <link rel="icon" type="image/png" href="/src/assets/icon-mantra.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mantra - AI Coding Sessions Time Machine</title>
-    <meta name="description" content="Replay context. Filter noise. Master the craft. Manage your Claude/Cursor logs and extract your personal coding mantras." />
+    <link rel="canonical" href="https://mantra.gonewx.com/" />
+    <meta name="description" content="Mantra is a free, local-first desktop app that replays AI coding sessions from Claude Code, Cursor, and Gemini CLI. Click any message to time-travel to that exact code state. Detect sensitive data, manage MCP services, and search across all sessions — 100% offline on macOS, Windows, and Linux." />
     <meta property="og:title" content="Mantra - AI Coding Sessions Time Machine" />
-    <meta property="og:description" content="Replay context. Filter noise. Master the craft. Manage your Claude/Cursor logs and extract your personal coding mantras." />
+    <meta property="og:description" content="Mantra is a free, local-first desktop app that replays AI coding sessions from Claude Code, Cursor, and Gemini CLI. Click any message to time-travel to that exact code state. 100% offline on macOS, Windows, and Linux." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mantra.gonewx.com/" />
+    <meta property="og:image" content="https://mantra.gonewx.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Mantra" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mantra - AI Coding Sessions Time Machine" />
-    <meta name="twitter:description" content="The local time machine for Claude/Cursor logs. Replay and refine your AI coding sessions." />
+    <meta name="twitter:description" content="Mantra is a free, local-first desktop app that replays AI coding sessions from Claude Code, Cursor, and Gemini CLI. Click any message to time-travel to that exact code state." />
+    <meta name="twitter:image" content="https://mantra.gonewx.com/og-image.png" />
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Mantra",
+      "url": "https://mantra.gonewx.com",
+      "logo": "https://mantra.gonewx.com/icon-mantra.png",
+      "sameAs": [
+        "https://github.com/mantra-hq",
+        "https://x.com/decker502",
+        "https://discord.gg/hZ73MMfJxy"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "mantra@gonewx.com",
+        "contactType": "customer support"
+      }
+    }
+    </script>
+    <!-- SoftwareApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Mantra",
+      "description": "Mantra is a free, local-first desktop application that replays AI coding sessions from Claude Code, Cursor, and Gemini CLI. Click any message to time-travel to that exact code state. Detect sensitive data, manage MCP services, and search across all sessions — 100% offline on macOS, Windows, and Linux.",
+      "url": "https://mantra.gonewx.com",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "macOS, Windows, Linux",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Session Replay, Time Travel, MCP Hub, Skills Hub, Sensitive Info Detection, Full-Text Search",
+      "softwareVersion": "0.11.0",
+      "author": {
+        "@type": "Organization",
+        "name": "Mantra",
+        "url": "https://mantra.gonewx.com"
+      }
+    }
+    </script>
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Mantra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mantra is a free, local-first desktop application that serves as a time machine for AI coding sessions. It maps conversations from Claude Code, Cursor, and Gemini CLI to each code change, letting you click any message to travel back to that exact moment in code. Built with Rust and React, version 0.11.0 supports macOS, Windows, and Linux."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is Mantra for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mantra is built for developers who use AI coding tools like Claude Code, Cursor, or Gemini CLI daily. It is especially valuable if you want to replay AI decision processes, manage MCP services across multiple tools, or detect sensitive data like API keys before sharing sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI coding tools does Mantra support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mantra currently supports Claude Code (Anthropic), Cursor, and Gemini CLI with full session replay and import. Support for OpenAI Codex and Antigravity is coming soon. Sessions from all supported tools are aggregated into a single unified timeline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What platforms does Mantra run on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mantra runs on macOS (Intel and Apple Silicon), Windows 10/11, and Linux (Ubuntu 20.04+, Fedora 36+). All platforms have the same features. Download free from mantra.gonewx.com."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Time Travel feature?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Time Travel lets you drag the timeline to replay every moment of your AI coding session while viewing the exact code state at that point. Click any message to instantly jump to the Git snapshot from that moment — like scrubbing through a video of your entire coding conversation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is MCP Hub?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MCP Hub is Mantra's unified control plane for Model Context Protocol services. Configure MCP servers once in Mantra, and they are automatically shared across Claude Code, Cursor, Gemini CLI, and other AI tools. It includes a built-in Inspector for testing and debugging MCP connections."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Mantra compare to reading raw session logs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Without Mantra, reviewing AI sessions means manually parsing JSONL files (Claude Code), querying SQLite databases (Cursor), or scrolling through unformatted logs. Mantra replaces this with a visual timeline you can scrub like a video, full-text search across all tools, content filtering, and automatic sensitive data detection."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I still need Git if I use Mantra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Mantra works alongside Git, not as a replacement. Git stores code snapshots; Mantra adds the AI conversation context layer — showing which prompt led to which code change, the reasoning behind each decision, and the full interaction history anchored to every Git commit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sensitive data can Mantra detect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mantra's local Rust-based engine detects API keys (OpenAI, Anthropic, AWS, Google Cloud), database passwords, access tokens, private key files, and sensitive environment variable values. All detection runs locally — nothing is sent anywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Mantra work completely offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All core features — session replay, Time Travel, MCP Hub, Skills Hub, full-text search, and sensitive data detection — work 100% offline. Your data never leaves your device. Sync and Publish are optional cloud add-ons that use end-to-end encryption."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Mantra really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All local features are free forever with no limitations — unlimited sessions and projects, MCP Hub, Git Time Travel, full-text search, and the local redaction engine. No sign-up required. Sync and Publish are optional paid add-ons for cloud features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does my data stay on my device?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All core features work 100% offline. Mantra never uploads your code or session content. Sync and Publish use end-to-end encryption — Mantra cannot read your data even if you use cloud features."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

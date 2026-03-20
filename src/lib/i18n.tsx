@@ -364,24 +364,76 @@ const translations = {
         title: 'Frequently Asked Questions',
         items: [
           {
+            q: 'What is Mantra?',
+            a: 'Mantra is a free, local-first desktop application that serves as a time machine for AI coding sessions. It maps conversations from Claude Code, Cursor, and Gemini CLI to each code change, letting you click any message to travel back to that exact moment in code. Built with Rust and React, version 0.11.0 supports macOS, Windows, and Linux.',
+          },
+          {
+            q: 'Who is Mantra for?',
+            a: 'Mantra is built for developers who use AI coding tools like Claude Code, Cursor, or Gemini CLI daily. It is especially valuable if you want to replay AI decision processes, manage MCP services across multiple tools, or detect sensitive data like API keys before sharing sessions.',
+          },
+          {
+            q: 'Which AI coding tools does Mantra support?',
+            a: 'Mantra currently supports Claude Code (Anthropic), Cursor, and Gemini CLI with full session replay and import. Support for OpenAI Codex and Antigravity is coming soon. Sessions from all supported tools are aggregated into a single unified timeline.',
+          },
+          {
+            q: 'What platforms does Mantra run on?',
+            a: 'Mantra runs on macOS (Intel and Apple Silicon), Windows 10/11, and Linux (Ubuntu 20.04+, Fedora 36+). All platforms have the same features. Download free from mantra.gonewx.com.',
+          },
+          {
+            q: 'What is the Time Travel feature?',
+            a: 'Time Travel lets you drag the timeline to replay every moment of your AI coding session while viewing the exact code state at that point. Click any message to instantly jump to the Git snapshot from that moment — like scrubbing through a video of your entire coding conversation.',
+          },
+          {
+            q: 'What is MCP Hub?',
+            a: 'MCP Hub is Mantra\'s unified control plane for Model Context Protocol services. Configure MCP servers once in Mantra, and they are automatically shared across Claude Code, Cursor, Gemini CLI, and other AI tools. It includes a built-in Inspector for testing and debugging MCP connections.',
+          },
+          {
+            q: 'How does full-text search work in Mantra?',
+            a: 'Press Cmd+K to search across all projects and sessions in seconds. Mantra builds a local search index covering prompts, AI responses, tool calls, and code changes from Claude Code, Cursor, and Gemini CLI. Results show highlighted context with one-click jump to the source message.',
+          },
+          {
+            q: 'How does Mantra compare to reading raw session logs?',
+            a: 'Without Mantra, reviewing AI sessions means manually parsing JSONL files (Claude Code), querying SQLite databases (Cursor), or scrolling through unformatted logs. Mantra replaces this with a visual timeline you can scrub like a video, full-text search across all tools, content filtering, and automatic sensitive data detection.',
+          },
+          {
+            q: 'Do I still need Git if I use Mantra?',
+            a: 'Yes. Mantra works alongside Git, not as a replacement. Git stores code snapshots; Mantra adds the AI conversation context layer — showing which prompt led to which code change, the reasoning behind each decision, and the full interaction history anchored to every Git commit.',
+          },
+          {
+            q: 'What sensitive data can Mantra detect?',
+            a: 'Mantra\'s local Rust-based engine detects API keys (OpenAI, Anthropic, AWS, Google Cloud), database passwords, access tokens, private key files, and sensitive environment variable values. All detection runs locally — nothing is sent anywhere. Preview diffs and one-click redact all findings before sharing.',
+          },
+          {
+            q: 'Does Mantra work completely offline?',
+            a: 'Yes. All core features — session replay, Time Travel, MCP Hub, Skills Hub, full-text search, and sensitive data detection — work 100% offline. Your data never leaves your device. Sync and Publish are optional cloud add-ons that use end-to-end encryption.',
+          },
+          {
+            q: 'Can I use Mantra for team code reviews?',
+            a: 'Yes. With the optional Publish feature, share session replays as web links. Reviewers see the full AI conversation that produced the code — not just the final diff. Built-in redaction removes sensitive data before sharing, and custom domain support is available for teams.',
+          },
+          {
+            q: 'How do I import my existing AI coding sessions?',
+            a: 'Open Mantra and the Import Wizard automatically scans for Claude Code, Cursor, and Gemini sessions on your machine. Select which sessions to import, and Mantra indexes them for instant search and replay. The import runs entirely locally without modifying original session files.',
+          },
+          {
             q: 'Is Mantra really free?',
-            a: 'Yes. All local features are free forever with no limitations. Sync and Publish are optional paid services for those who want cloud features.',
+            a: 'Yes. All local features are free forever with no limitations — unlimited sessions and projects, MCP Hub, Git Time Travel, full-text search, and the local redaction engine. No sign-up required. Sync and Publish are optional paid add-ons for cloud features.',
           },
           {
             q: 'Do I need to pay for commercial use?',
-            a: 'No. A commercial license is not mandatory, but if you use Mantra for work in an organization, we encourage you to purchase one to keep Mantra independent and 100% user-supported.',
+            a: 'No. A commercial license is not mandatory, but if you use Mantra for work in an organization, we encourage you to purchase one ($50/user/year) to keep Mantra independent and 100% user-supported.',
           },
           {
             q: 'Does my data stay on my device?',
-            a: 'Yes. Core features work 100% offline. Sync and Publish use end-to-end encryption - we cannot read your data.',
+            a: 'Yes. All core features work 100% offline. Mantra never uploads your code or session content. Sync and Publish use end-to-end encryption — Mantra cannot read your data even if you use cloud features.',
           },
           {
             q: 'What is BYOK?',
-            a: 'Bring Your Own Key. Use your own API keys for OpenAI, Anthropic, etc. Keys never leave your machine.',
+            a: 'Bring Your Own Key. Use your own API keys for OpenAI, Anthropic, and other services. Keys are stored locally on your machine and never transmitted to Mantra servers.',
           },
           {
             q: 'Can I get a refund?',
-            a: 'Yes, within 7 days of purchase for Sync/Publish, and within 14 days for Pioneer/Commercial licenses.',
+            a: 'Yes, within 7 days of purchase for Sync/Publish, and within 14 days for Pioneer/Commercial licenses. Contact mantra@gonewx.com.',
           },
         ],
       },
@@ -748,24 +800,76 @@ const translations = {
         title: '常见问题',
         items: [
           {
+            q: 'Mantra 是什么？',
+            a: 'Mantra 是一款免费的本地优先桌面应用，专为 AI 编程会话打造的「时光机」。它将你在 Claude Code、Cursor、Gemini CLI 中的对话自动映射到每次代码变更，点击任意消息即可穿越回那一刻的代码状态。基于 Rust + React 构建，v0.11.0 支持 macOS、Windows 和 Linux。',
+          },
+          {
+            q: 'Mantra 适合谁用？',
+            a: 'Mantra 面向日常使用 Claude Code、Cursor、Gemini CLI 等 AI 编程工具的开发者。尤其适合需要回放 AI 决策过程、跨工具统一管理 MCP 服务，或在分享会话前检测 API Key 等敏感数据的场景。',
+          },
+          {
+            q: 'Mantra 支持哪些 AI 编程工具？',
+            a: 'Mantra 目前支持 Claude Code（Anthropic）、Cursor 和 Gemini CLI，提供完整的会话回放与导入功能。OpenAI Codex 和 Antigravity 的支持即将上线。所有工具的会话都聚合在同一条统一时间轴中。',
+          },
+          {
+            q: 'Mantra 支持哪些操作系统？',
+            a: 'Mantra 支持 macOS（Intel 和 Apple Silicon）、Windows 10/11 和 Linux（Ubuntu 20.04+、Fedora 36+）。所有平台功能完全一致。可在 mantra.gonewx.com 免费下载。',
+          },
+          {
+            q: '什么是「时间旅行」功能？',
+            a: '时间旅行让你拖拽时间轴回放 AI 编程会话的每一刻，同时查看那一刻的精确代码状态。点击任意一条消息，代码视图瞬间跳转到对应的 Git 快照——就像在看你整个编程过程的视频一样。',
+          },
+          {
+            q: '什么是 MCP Hub？',
+            a: 'MCP Hub 是 Mantra 的统一 MCP（模型上下文协议）服务管理中心。在 Mantra 中配置一次 MCP 服务器，Claude Code、Cursor、Gemini CLI 等 AI 工具自动共享。内置 Inspector 调试器，支持一键测试和问题排查。',
+          },
+          {
+            q: 'Mantra 的全文搜索是怎么工作的？',
+            a: '按 Cmd+K 即可跨项目、跨会话秒级检索。Mantra 在本地构建覆盖用户提示、AI 回复、工具调用和代码变更的搜索索引，支持 Claude Code、Cursor 和 Gemini CLI 的会话内容。搜索结果高亮显示上下文，一键跳转到源消息。',
+          },
+          {
+            q: 'Mantra 和手动查看原始日志有什么区别？',
+            a: '没有 Mantra，查看 AI 会话意味着手动解析 JSONL 文件（Claude Code）、查询 SQLite 数据库（Cursor），或滚动浏览无格式日志。Mantra 用可拖拽时间轴、跨工具全文搜索、内容过滤和自动敏感数据检测替代了这些繁琐操作。',
+          },
+          {
+            q: '使用 Mantra 还需要 Git 吗？',
+            a: '需要。Mantra 与 Git 配合使用，而非替代 Git。Git 存储代码快照；Mantra 添加 AI 对话上下文层——展示哪个提示导致了哪次代码变更、每个决策背后的推理过程，以及锚定在每个 Git 提交上的完整交互历史。',
+          },
+          {
+            q: 'Mantra 能检测哪些敏感数据？',
+            a: 'Mantra 的本地 Rust 脱敏引擎可检测 API Key（OpenAI、Anthropic、AWS、Google Cloud）、数据库密码、访问令牌、私钥文件和敏感环境变量值。所有检测完全在本地运行，不会发送任何数据。支持 Diff 预览后一键脱敏。',
+          },
+          {
+            q: 'Mantra 可以完全离线使用吗？',
+            a: '可以。所有核心功能——会话回放、时间旅行、MCP Hub、Skills Hub、全文搜索和敏感数据检测——均 100% 离线可用。数据不会离开你的设备。Sync 和 Publish 是使用端到端加密的可选云服务。',
+          },
+          {
+            q: 'Mantra 可以用于团队代码审查吗？',
+            a: '可以。使用可选的 Publish 功能，将会话回放分享为 Web 链接。审查者可以看到产出代码的完整 AI 对话，而不仅仅是最终 Diff。内置脱敏功能确保分享前移除敏感数据，团队还可使用自定义域名。',
+          },
+          {
+            q: '如何导入已有的 AI 编程会话？',
+            a: '打开 Mantra，导入向导会自动扫描你电脑上的 Claude Code、Cursor 和 Gemini 会话。选择要导入的会话，Mantra 即刻为其建立索引，支持即时搜索和回放。整个导入过程完全在本地完成，不会修改原始会话文件。',
+          },
+          {
             q: 'Mantra 真的免费吗？',
-            a: '是的。所有本地功能永久免费，没有任何限制。Sync 和 Publish 是可选的付费服务，适合需要云功能的用户。',
+            a: '是的。所有本地功能永久免费，没有任何限制——无限会话和项目、MCP Hub、Git 时间旅行、全文搜索和本地脱敏引擎。无需注册。Sync 和 Publish 是可选的付费云服务。',
           },
           {
             q: '商业使用需要付费吗？',
-            a: '不需要。购买商业许可证并非强制要求，但如果你在组织中使用 Mantra 进行工作，我们鼓励你购买商业许可证，以保持 Mantra 的独立性和 100% 用户支持。',
+            a: '不需要。购买商业许可证并非强制要求，但如果你在组织中使用 Mantra，我们鼓励你购买商业许可证（$50/人/年）以保持 Mantra 的独立性和 100% 用户支持。',
           },
           {
             q: '我的数据会保留在本地吗？',
-            a: '是的。核心功能 100% 离线可用。Sync 和 Publish 使用端到端加密——我们无法读取你的数据。',
+            a: '是的。核心功能 100% 离线可用。Mantra 绝不会上传你的代码或会话内容。Sync 和 Publish 使用端到端加密——即使使用云功能，Mantra 也无法读取你的数据。',
           },
           {
             q: '什么是 BYOK？',
-            a: 'Bring Your Own Key，自带密钥。使用你自己的 OpenAI、Anthropic 等 API Key。密钥永远不会离开你的设备。',
+            a: 'Bring Your Own Key，自带密钥。使用你自己的 OpenAI、Anthropic 等 API Key。密钥保存在你的本地设备上，绝不会传输到 Mantra 服务器。',
           },
           {
             q: '可以退款吗？',
-            a: '可以。Sync/Publish 支持 7 天内退款，Pioneer/Commercial 许可支持 14 天内退款。',
+            a: '可以。Sync/Publish 支持 7 天内退款，Pioneer/Commercial 许可支持 14 天内退款。联系 mantra@gonewx.com。',
           },
         ],
       },
