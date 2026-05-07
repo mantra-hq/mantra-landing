@@ -3,14 +3,15 @@ import claudeCodeIcon from '../assets/icon-claudecode.svg';
 import cursorIcon from '../assets/icon-cursor.png';
 import geminiIcon from '../assets/icon-gemini.png';
 import codexIcon from '../assets/icon-codex.svg';
-import antigravityIcon from '../assets/antigravity.png';
-
+import copilotChatIcon from '../assets/icon-copilot-chat.svg';
+import openCodeIcon from '../assets/icon-opencode.svg';
 const tools = [
   { name: 'Claude Code', icon: claudeCodeIcon, status: 'supported' },
   { name: 'Cursor', icon: cursorIcon, status: 'supported' },
   { name: 'Gemini CLI', icon: geminiIcon, status: 'supported' },
   { name: 'Codex', icon: codexIcon, status: 'supported' },
-  { name: 'Antigravity', icon: antigravityIcon, status: 'coming' },
+  { name: 'GitHub Copilot Chat', icon: copilotChatIcon, status: 'supported' },
+  { name: 'OpenCode', icon: openCodeIcon, status: 'supported' },
 ];
 
 export function SupportedTools() {
@@ -25,7 +26,7 @@ export function SupportedTools() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {tools.map((tool) => (
             <div
               key={tool.name}

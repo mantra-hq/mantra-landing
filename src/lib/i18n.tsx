@@ -126,7 +126,7 @@ const translations = {
         points: [
           {
             title: 'MCP Unified Gateway',
-            description: 'Add MCP services in Mantra — Claude Code, Cursor, Gemini CLI, Codex, and Antigravity automatically share the same tools and context.',
+            description: 'Add MCP services in Mantra — Claude Code, Cursor, Gemini CLI, Codex, Copilot Chat, and OpenCode automatically share the same tools and context.',
           },
           {
             title: 'Skills Hub',
@@ -373,7 +373,7 @@ const translations = {
           },
           {
             q: 'Which AI coding tools does Mantra support?',
-            a: 'Mantra currently supports Claude Code (Anthropic), Cursor, and Gemini CLI with full session replay and import. Support for OpenAI Codex and Antigravity is coming soon. Sessions from all supported tools are aggregated into a single unified timeline.',
+            a: 'Mantra supports Claude Code, Cursor, Gemini CLI, Codex, GitHub Copilot Chat, and OpenCode with full session replay and import. Sessions from all supported tools are aggregated into a single unified timeline.',
           },
           {
             q: 'What platforms does Mantra run on?',
@@ -562,7 +562,7 @@ const translations = {
         points: [
           {
             title: 'MCP 统一网关',
-            description: '在 Mantra 中配置 MCP 服务，Claude Code、Cursor、Gemini CLI、Codex、Antigravity 自动共享相同的工具和上下文。',
+            description: '在 Mantra 中配置 MCP 服务，Claude Code、Cursor、Gemini CLI、Codex、Copilot Chat、OpenCode 自动共享相同的工具和上下文。',
           },
           {
             title: 'Skills Hub',
@@ -809,7 +809,7 @@ const translations = {
           },
           {
             q: 'Mantra 支持哪些 AI 编程工具？',
-            a: 'Mantra 目前支持 Claude Code（Anthropic）、Cursor 和 Gemini CLI，提供完整的会话回放与导入功能。OpenAI Codex 和 Antigravity 的支持即将上线。所有工具的会话都聚合在同一条统一时间轴中。',
+            a: 'Mantra 支持 Claude Code、Cursor、Gemini CLI、Codex、GitHub Copilot Chat 和 OpenCode，提供完整的会话回放与导入功能。所有工具的会话都聚合在同一条统一时间轴中。',
           },
           {
             q: 'Mantra 支持哪些操作系统？',
