@@ -3,4 +3,4 @@
 # 注意：此文件不应提交到 Git
 
 SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+SUPABASE_SECRET_KEY=sb_secret_xxx   # Supabase Dashboard → API Keys → Secret keys

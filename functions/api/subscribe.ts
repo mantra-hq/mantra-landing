@@ -2,7 +2,9 @@ import { createClient } from '@supabase/supabase-js'
 
 interface Env {
   SUPABASE_URL: string
-  SUPABASE_SERVICE_ROLE_KEY: string
+  SUPABASE_SECRET_KEY?: string
+  // Legacy（Supabase 2026 年末停用）。新部署请使用 SUPABASE_SECRET_KEY。
+  SUPABASE_SERVICE_ROLE_KEY?: string
 }
 
 interface PagesContext {
@@ -39,7 +41,8 @@ export async function onRequest(context: PagesContext): Promise<Response> {
   }
 
   // 验证环境变量
-  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+  const apiKey = env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY
+  if (!env.SUPABASE_URL || !apiKey) {
     return new Response(
       JSON.stringify({ error: 'Server configuration error' }),
       {
@@ -75,7 +78,7 @@ export async function onRequest(context: PagesContext): Promise<Response> {
     }
 
     // 创建 Supabase 客户端
-    const supabase = createClient(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY)
+    const supabase = createClient(env.SUPABASE_URL, apiKey)
 
     // 插入订阅数据
     const { error } = await supabase.from('subscribers').insert({

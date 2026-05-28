@@ -139,10 +139,13 @@ VitePress 文档使用 `locales` 配置：
 ```bash
 # 通过 Wrangler CLI 设置（推荐）
 npx wrangler pages secret put SUPABASE_URL --project-name mantra-landing
-npx wrangler pages secret put SUPABASE_SERVICE_ROLE_KEY --project-name mantra-landing
+npx wrangler pages secret put SUPABASE_SECRET_KEY --project-name mantra-landing
 ```
 
 或在 Dashboard → Settings → Variables and Secrets 中添加（Type 选 Secret）。
+
+> **关于 key 命名**：`SUPABASE_SECRET_KEY` 对应 Supabase 新一代 `sb_secret_...` key（2025 年 6 月推出）。
+> 代码同时兼容旧名 `SUPABASE_SERVICE_ROLE_KEY`，但 Supabase 计划在 2026 年末停用 legacy anon/service_role keys，建议尽早迁移。
 
 ### 本地开发
 
@@ -150,7 +153,7 @@ npx wrangler pages secret put SUPABASE_SERVICE_ROLE_KEY --project-name mantra-la
 
 ```
 SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=xxx
+SUPABASE_SECRET_KEY=sb_secret_xxx
 ```
 
 ### 部署路径
@@ -159,16 +162,9 @@ SUPABASE_SERVICE_ROLE_KEY=xxx
 
 ### Supabase 心跳任务
 
-Supabase 免费版会在 7 天不活跃后暂停实例。项目配置了 GitHub Actions 定时任务来保持实例活跃。
+Supabase 免费版会在 7 天不活跃后暂停实例。
 
-**配置 GitHub Repository Secrets**（Settings → Secrets and variables → Actions）：
-
-| Secret 名称 | 值 |
-|------------|---|
-| `SUPABASE_URL` | `https://xxx.supabase.co` |
-| `SUPABASE_SERVICE_ROLE_KEY` | 你的 service role key |
-
-心跳任务每天 UTC 00:00（北京时间 08:00）自动执行，也可在 Actions 页面手动触发。
+保活由 org 级 workflow 统一管理，不在本仓库配置——见 [`mantra-hq/.github`](https://github.com/mantra-hq/.github) 仓库的 `.github/workflows/wake-up-supabase.yml`。该 workflow 每天 UTC 06:00（北京时间 14:00）通过仓库 secret `SUPABASE_PROJECTS_JSON` 中配置的项目列表，统一 ping 全部 Supabase 实例的 `/auth/v1/health` 端点。
 
 ## License
 
