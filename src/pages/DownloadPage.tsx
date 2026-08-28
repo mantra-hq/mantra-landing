@@ -285,17 +285,17 @@ export function DownloadPage() {
                       {/* Step 2 */}
                       <div>
                         <p className="font-medium text-white mb-1">
-                          {lang === 'zh' ? '② 绕过 Gatekeeper 安全检查' : '② Bypass Gatekeeper'}
+                          {lang === 'zh' ? '② 旧版本被 Gatekeeper 阻止？' : '② Older version blocked by Gatekeeper?'}
                         </p>
                         <p className="text-gray-400 mb-2">
                           {lang === 'zh'
-                            ? 'macOS 会阻止未经 Apple 公证的应用。右键点击 DMG 文件，选择「打开」，再次点击「打开」确认即可。或者在终端运行：'
-                            : 'macOS blocks apps not notarized by Apple. Right-click the DMG → Open → confirm Open. Or run in Terminal:'}
+                            ? '最新版本已通过 Apple 公证，可直接打开。若使用旧版本遇到「无法验证开发者」提示，右键点击应用选择「打开」，再次点击「打开」确认即可。或者在终端运行：'
+                            : 'The latest release is notarized by Apple and opens directly. If an older version shows a "developer cannot be verified" prompt, right-click the app → Open → confirm Open. Or run in Terminal:'}
                         </p>
                         <div className="flex items-center gap-2 px-3 py-2 bg-dark-600/80 rounded-lg border border-white/10">
                           <Terminal className="w-4 h-4 text-gray-500 shrink-0" />
                           <code className="text-green-400 font-mono text-xs break-all">
-                            xattr -cr /Applications/Mantra.app
+                            xattr -cr /Applications/mantra.app
                           </code>
                         </div>
                       </div>
